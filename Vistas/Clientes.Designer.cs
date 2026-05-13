@@ -254,7 +254,7 @@
             this.Controls.Add(this.dgwClientes);
             this.Controls.Add(this.groupBox1);
             this.Name = "Clientes";
-            this.Text = "x`";
+            this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
