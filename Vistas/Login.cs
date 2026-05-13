@@ -32,7 +32,7 @@ namespace Vistas
             string user = txtUsuario.Text;
             string pass = txtContraseña.Text;
 
-            var usuarioValido = UsuarioService.ValidarUsuario(user, pass);
+            Usuario usuarioValido = TrabajarUsuario.validar_login(user, pass);
 
             if (usuarioValido != null)
             {
@@ -41,8 +41,9 @@ namespace Vistas
                 Principal frmPrincipal = new Principal(usuarioValido);
                 this.Hide();
                 frmPrincipal.ShowDialog(this);
-                txtContraseña.Clear();
+                
                 txtUsuario.Clear();
+                txtContraseña.Clear();
                 this.Show();
 
             }

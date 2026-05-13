@@ -17,27 +17,29 @@ namespace Vistas
             InitializeComponent();
         }
 
+        private void load_clientes()
+        {
+            dgwClientes.DataSource = TrabajarCliente.list_client();
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Cliente oCliente = new Cliente();
-
             oCliente.Cli_DNI = txtDNI.Text;
             oCliente.Cli_Apellido = txtApellido.Text;
             oCliente.Cli_Nombre = txtNombre.Text;
-            oCliente.Direccion = txtDireccion.Text;
+            oCliente.Cli_Direccion = txtDireccion.Text;
             oCliente.OS_CUIT = txtObraSocial.Text;
             oCliente.Cli_NroCarnet = txtNroCarnet.Text;
 
-            string mensaje = string.Format("Confirme los datos:\nDNI: {0}\nApellido: {1}\nNombre: {2}\nDireccion: {3}\nObra Social: {4}\nNro Carnet: {5:C}",
-                                            oCliente.Cli_DNI,
-                                            oCliente.Cli_Apellido,
-                                            oCliente.Cli_Nombre,
-                                            oCliente.Direccion,
-                                            oCliente.OS_CUIT,
-                                            oCliente.Cli_NroCarnet);
+            TrabajarCliente.insert_cliente(oCliente);
 
-            MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            MessageBox.Show("Cliente registrado con éxito"); // Feedback
+
+            // Limpiar campos
+            limpiar_campos();
+
+            load_clientes(); // Esto ahora funcionará sin el error del 'as'
         }
 
         private void btnGuardar_MouseHover(object sender, EventArgs e)
@@ -59,12 +61,106 @@ namespace Vistas
 
         private void Clientes_Load(object sender, EventArgs e)
         {
-
+            load_clientes();
         }
 
         private void txtDNI_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (txtPattern.Text != "")
+            {
+                dgwClientes.DataSource = TrabajarCliente.search_clientes(txtPattern.Text);
+            }
+            else
+            {
+                load_clientes();
+            }
+        }
+
+        private void dgwClientes_CurrentCellChanged(object sender, EventArgs e)
+        {
+            // Agregamos esta validación extra para evitar errores al cargar
+            if (dgwClientes.CurrentRow != null && dgwClientes.CurrentRow.Cells["DNI"].Value != DBNull.Value)
+            {
+                txtDNI.Text = dgwClientes.CurrentRow.Cells["DNI"].Value.ToString();
+                txtDNI.Enabled = false;
+                txtApellido.Text = dgwClientes.CurrentRow.Cells["Apellido"].Value.ToString();
+                txtNombre.Text = dgwClientes.CurrentRow.Cells["Nombre"].Value.ToString();
+                txtDireccion.Text = dgwClientes.CurrentRow.Cells["Direccion"].Value.ToString();
+
+                // Fíjate que aquí dice "Obrasocial", igual que en el SELECT de arriba
+                txtObraSocial.Text = dgwClientes.CurrentRow.Cells["Obrasocial"].Value.ToString();
+                txtNroCarnet.Text = dgwClientes.CurrentRow.Cells["NroCarnet"].Value.ToString();
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgwClientes.CurrentRow != null)
+            {
+                DialogResult result = MessageBox.Show("¿Desea guardar los cambios para este cliente?", "Modificar", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Cliente oCliente = new Cliente();
+                    oCliente.Cli_DNI = txtDNI.Text; // El DNI no debería cambiar si es PK
+                    oCliente.Cli_Apellido = txtApellido.Text;
+                    oCliente.Cli_Nombre = txtNombre.Text;
+                    oCliente.Cli_Direccion = txtDireccion.Text;
+                    oCliente.OS_CUIT = txtObraSocial.Text;
+                    oCliente.Cli_NroCarnet = txtNroCarnet.Text;
+
+                    TrabajarCliente.update_cliente(oCliente);
+                    MessageBox.Show("Cliente actualizado correctamente");
+                    load_clientes();
+                    limpiar_campos();
+                }
+            }
+        }
+        private void limpiar_campos()
+        {
+            txtDNI.Text = "";
+            txtApellido.Text = "";
+            txtNombre.Text = "";
+            txtDireccion.Text = "";
+            txtObraSocial.Text = "";
+            txtNroCarnet.Text = "";
+            txtDNI.Enabled = true; // Lo habilitamos para una nueva carga
+            txtDNI.Focus();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgwClientes.CurrentRow != null)
+            {
+                string dni = dgwClientes.CurrentRow.Cells["DNI"].Value.ToString();
+                string nombre = dgwClientes.CurrentRow.Cells["Apellido"].Value.ToString();
+
+                DialogResult result = MessageBox.Show("¿Eliminar al cliente " + nombre + "?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    TrabajarCliente.delete_cliente(dni);
+                    load_clientes();
+                    limpiar_campos();
+                }
+            }
+        }
+
+        private void txtPattern_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPattern.Text != "")
+                dgwClientes.DataSource = TrabajarCliente.search_clientes(txtPattern.Text);
+            else
+                load_clientes();
         }
     }
 }

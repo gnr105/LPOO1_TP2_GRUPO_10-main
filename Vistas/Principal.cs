@@ -14,10 +14,40 @@ namespace Vistas
     public partial class Principal : Form
     {
         private Usuario usuarioLogueado;
-        public Principal(Usuario usuario )
+        public Principal(Usuario user)
         {
             InitializeComponent();
-            usuarioLogueado = usuario; 
+            this.usuarioLogueado = user;
+            aplicar_restricciones(); // Esto activa los permisos apenas abre la ventana
+        }
+
+        private void aplicar_restricciones()
+        {
+            // Supongamos: 1 = Administrador, 2 = Operador, 3 = Auditor
+
+            if (usuarioLogueado.Rol_Codigo == 1) // Administrador
+            {
+                btnGUsuario.Enabled = true;
+                btnGProduct.Enabled = true;
+                btnGCliente.Enabled = false; // El pedido dice que Admin es solo Usuarios y Prod
+                btnGVenta.Enabled = false;
+            }
+            else if (usuarioLogueado.Rol_Codigo == 2) // Operador
+            {
+                btnGUsuario.Enabled = false;
+                btnGProduct.Enabled = false;
+                btnGCliente.Enabled = true;
+                btnGVenta.Enabled = true;
+            }
+            else if (usuarioLogueado.Rol_Codigo == 3) // Auditor
+            {
+                // Auditor tiene acceso a TODO según tu consigna
+                btnGUsuario.Enabled = true;
+                btnGProduct.Enabled = true;
+                btnGCliente.Enabled = true;
+                btnGVenta.Enabled = true;
+                btnGOS.Enabled = true;
+            }
         }
 
         private void sistemaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -25,23 +55,6 @@ namespace Vistas
             //Hacer lo mismo que el boton aceptar para redirigir al formulario Sistema
         }
 
-        private void btnAddClient_Click(object sender, EventArgs e)
-        {
-            Clientes frmCliente = new Clientes();
-            frmCliente.Show();
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            Productos frmProductos = new Productos();
-            frmProductos.Show();
-        }
-
-        private void btnAddOS_Click(object sender, EventArgs e)
-        {
-            ObrasSociales frmObraSocial = new ObrasSociales();
-            frmObraSocial.Show();
-        }
 
         private void Principal_Load(object sender, EventArgs e)
         {
@@ -55,7 +68,6 @@ namespace Vistas
             {
                 this.Text = "Principal - Usuario: " + usuarioLogueado.Usu_ApellidoNombre;
             }
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -67,15 +79,36 @@ namespace Vistas
                 this.Close();
                 
             }
-            
-            
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             FrmUsuario frmUsuario = new FrmUsuario();
             frmUsuario.Show();
+        }
+
+        private void btnGCliente_Click(object sender, EventArgs e)
+        {
+            Clientes frmCliente = new Clientes();
+            frmCliente.Show();
+        }
+
+        private void btnGProduct_Click(object sender, EventArgs e)
+        {
+            Productos frmProductos = new Productos();
+            frmProductos.Show();
+        }
+
+        private void btnGOS_Click(object sender, EventArgs e)
+        {
+            ObrasSociales frmObraSocial = new ObrasSociales();
+            frmObraSocial.Show();
+        }
+
+        private void btnGVenta_Click(object sender, EventArgs e)
+        {
+            Ventas frmVenta = new Ventas();
+            frmVenta.Show();
         }
     }
 }

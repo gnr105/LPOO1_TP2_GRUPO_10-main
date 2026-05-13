@@ -69,5 +69,97 @@ namespace ClaseBase
 
             return dt;
         }
+
+        public static DataTable search_usuarios(string sPattern)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT ";
+            cmd.CommandText += "Usu_NombreUsuario as 'Usuario', ";
+            cmd.CommandText += "Usu_Contraseña as 'Contraseña', ";
+            cmd.CommandText += "Usu_ApellidoNombre as 'ApellidoNombre', "; // Faltaba una coma aquí
+            cmd.CommandText += "Rol_Descripcion as 'Rol', "; // Aquí la coma estaba bien, pero faltaba el espacio
+            cmd.CommandText += "Usu_ID, U.Rol_Codigo ";
+            cmd.CommandText += "FROM Usuario as U ";
+            cmd.CommandText += "LEFT JOIN Roles as R ON (R.Rol_Codigo=U.Rol_Codigo)";
+
+            cmd.CommandText += "WHERE ";
+            cmd.CommandText += "Usu_ApellidoNombre LIKE @pattern";
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@pattern", "%"+sPattern+"%");
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            return dt;
+        }
+
+        public static void update_usuario(Usuario user)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE Usuario SET Usu_NombreUsuario=@user, Usu_Contraseña=@pss, Usu_ApellidoNombre=@ape, Rol_Codigo=@rol WHERE Usu_ID=@id";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+
+            // Pasamos todos los parámetros, incluyendo el ID para el WHERE
+            cmd.Parameters.AddWithValue("@user", user.Usu_NombreUsuario);
+            cmd.Parameters.AddWithValue("@pss", user.Usu_Contrasenia);
+            cmd.Parameters.AddWithValue("@ape", user.Usu_ApellidoNombre);
+            cmd.Parameters.AddWithValue("@rol", user.Rol_Codigo);
+            cmd.Parameters.AddWithValue("@id", user.Usu_ID);
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+        }
+
+        public static void delete_usuario(int id)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand("DELETE FROM Usuario WHERE Usu_ID=@id", cnn);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+        }
+
+        public static Usuario validar_login(string user, string pass)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            // Buscamos el usuario que coincida exactamente con ambos campos
+            cmd.CommandText = "SELECT * FROM Usuario WHERE Usu_NombreUsuario=@user AND Usu_Contraseña=@pass";
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", pass);
+
+            cmd.Connection = cnn;
+            cnn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            Usuario oUser = null;
+
+            if (reader.Read())
+            {
+                oUser = new Usuario();
+                oUser.Usu_ID = (int)reader["Usu_ID"];
+                oUser.Usu_NombreUsuario = (string)reader["Usu_NombreUsuario"];
+                oUser.Usu_ApellidoNombre = (string)reader["Usu_ApellidoNombre"];
+                oUser.Rol_Codigo = (int)reader["Rol_Codigo"];
+                // No es necesario guardar la contraseña en el objeto por seguridad
+            }
+
+            cnn.Close();
+            return oUser; // Si no lo encuentra, devuelve null
+        }
+       
     }
 }

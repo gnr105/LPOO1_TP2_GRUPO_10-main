@@ -13,22 +13,21 @@ namespace ClaseBase
 
         public string Cli_Nombre { get; set; }
 
-        public string Direccion { get; set; }
+        public string Cli_Direccion { get; set; }
 
         public string OS_CUIT { get; set; }
 
         public string Cli_NroCarnet { get; set; }
-
-        public Cliente() { }
 
         public Cliente(string dni, string apellido, string nombre, string direccion, string cuit, string carnet)
         {
             Cli_DNI = dni;
             Cli_Apellido = apellido;
             Cli_Nombre = nombre;
-            Direccion = direccion;
+            Cli_Direccion = direccion;
             OS_CUIT = cuit;
             Cli_NroCarnet = carnet;
         }
+        public Cliente() { }
     }
 }
