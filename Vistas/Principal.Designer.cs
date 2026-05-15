@@ -38,14 +38,16 @@
             this.departamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGUsuario = new System.Windows.Forms.Button();
             this.btnGVenta = new System.Windows.Forms.Button();
+            this.btnListVentas = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGCliente
             // 
-            this.btnGCliente.Location = new System.Drawing.Point(83, 101);
+            this.btnGCliente.Location = new System.Drawing.Point(112, 94);
+            this.btnGCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGCliente.Name = "btnGCliente";
-            this.btnGCliente.Size = new System.Drawing.Size(125, 23);
+            this.btnGCliente.Size = new System.Drawing.Size(167, 28);
             this.btnGCliente.TabIndex = 0;
             this.btnGCliente.Text = "Gestion Cliente";
             this.btnGCliente.UseVisualStyleBackColor = true;
@@ -53,9 +55,10 @@
             // 
             // btnGOS
             // 
-            this.btnGOS.Location = new System.Drawing.Point(287, 101);
+            this.btnGOS.Location = new System.Drawing.Point(383, 134);
+            this.btnGOS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGOS.Name = "btnGOS";
-            this.btnGOS.Size = new System.Drawing.Size(125, 23);
+            this.btnGOS.Size = new System.Drawing.Size(167, 28);
             this.btnGOS.TabIndex = 1;
             this.btnGOS.Text = "Gestion Obra Social";
             this.btnGOS.UseVisualStyleBackColor = true;
@@ -63,9 +66,10 @@
             // 
             // btnGProduct
             // 
-            this.btnGProduct.Location = new System.Drawing.Point(83, 174);
+            this.btnGProduct.Location = new System.Drawing.Point(112, 184);
+            this.btnGProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGProduct.Name = "btnGProduct";
-            this.btnGProduct.Size = new System.Drawing.Size(125, 23);
+            this.btnGProduct.Size = new System.Drawing.Size(167, 28);
             this.btnGProduct.TabIndex = 2;
             this.btnGProduct.Text = "Gestion Producto";
             this.btnGProduct.UseVisualStyleBackColor = true;
@@ -73,9 +77,10 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(287, 235);
+            this.btnSalir.Location = new System.Drawing.Point(383, 289);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(125, 23);
+            this.btnSalir.Size = new System.Drawing.Size(167, 28);
             this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Cerrar sesión";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -89,34 +94,36 @@
             this.departamentoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(494, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(659, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // sistemaToolStripMenuItem
             // 
             this.sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
-            this.sistemaToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.sistemaToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
             this.sistemaToolStripMenuItem.Text = "Sistema";
             this.sistemaToolStripMenuItem.Click += new System.EventHandler(this.sistemaToolStripMenuItem_Click);
             // 
             // inquilinoToolStripMenuItem
             // 
             this.inquilinoToolStripMenuItem.Name = "inquilinoToolStripMenuItem";
-            this.inquilinoToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.inquilinoToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.inquilinoToolStripMenuItem.Text = "Inquilino";
             // 
             // departamentoToolStripMenuItem
             // 
             this.departamentoToolStripMenuItem.Name = "departamentoToolStripMenuItem";
-            this.departamentoToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.departamentoToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
             this.departamentoToolStripMenuItem.Text = "Departamento";
             // 
             // btnGUsuario
             // 
-            this.btnGUsuario.Location = new System.Drawing.Point(83, 235);
+            this.btnGUsuario.Location = new System.Drawing.Point(112, 259);
+            this.btnGUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGUsuario.Name = "btnGUsuario";
-            this.btnGUsuario.Size = new System.Drawing.Size(125, 23);
+            this.btnGUsuario.Size = new System.Drawing.Size(167, 28);
             this.btnGUsuario.TabIndex = 5;
             this.btnGUsuario.Text = "Gestion de Usuario";
             this.btnGUsuario.UseVisualStyleBackColor = true;
@@ -124,19 +131,31 @@
             // 
             // btnGVenta
             // 
-            this.btnGVenta.Location = new System.Drawing.Point(287, 174);
+            this.btnGVenta.Location = new System.Drawing.Point(383, 214);
+            this.btnGVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGVenta.Name = "btnGVenta";
-            this.btnGVenta.Size = new System.Drawing.Size(125, 23);
+            this.btnGVenta.Size = new System.Drawing.Size(167, 28);
             this.btnGVenta.TabIndex = 6;
             this.btnGVenta.Text = "Gestion Venta";
             this.btnGVenta.UseVisualStyleBackColor = true;
             this.btnGVenta.Click += new System.EventHandler(this.btnGVenta_Click);
             // 
+            // btnListVentas
+            // 
+            this.btnListVentas.Location = new System.Drawing.Point(371, 59);
+            this.btnListVentas.Name = "btnListVentas";
+            this.btnListVentas.Size = new System.Drawing.Size(188, 31);
+            this.btnListVentas.TabIndex = 7;
+            this.btnListVentas.Text = "Listado de Ventas";
+            this.btnListVentas.UseVisualStyleBackColor = true;
+            this.btnListVentas.Click += new System.EventHandler(this.btnListVentas_Click);
+            // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 314);
+            this.ClientSize = new System.Drawing.Size(659, 386);
+            this.Controls.Add(this.btnListVentas);
             this.Controls.Add(this.btnGVenta);
             this.Controls.Add(this.btnGUsuario);
             this.Controls.Add(this.btnSalir);
@@ -145,6 +164,7 @@
             this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Principal";
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.Principal_Load);
@@ -167,5 +187,6 @@
         private System.Windows.Forms.ToolStripMenuItem departamentoToolStripMenuItem;
         private System.Windows.Forms.Button btnGUsuario;
         private System.Windows.Forms.Button btnGVenta;
+        private System.Windows.Forms.Button btnListVentas;
     }
 }

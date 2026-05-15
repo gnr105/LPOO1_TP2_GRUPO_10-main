@@ -38,6 +38,7 @@ namespace Vistas
                 btnGProduct.Enabled = false;
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
+                btnListVentas.Enabled = true;
             }
             else if (usuarioLogueado.Rol_Codigo == 3) // Auditor
             {
@@ -47,6 +48,7 @@ namespace Vistas
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
                 btnGOS.Enabled = true;
+                btnListVentas.Enabled = true;
             }
         }
 
@@ -109,6 +111,12 @@ namespace Vistas
         {
             Ventas frmVenta = new Ventas();
             frmVenta.Show();
+        }
+
+        private void btnListVentas_Click(object sender, EventArgs e)
+        {
+            FrmListVenta frmListVentas = new FrmListVenta();
+            frmListVentas.Show();
         }
     }
 }
