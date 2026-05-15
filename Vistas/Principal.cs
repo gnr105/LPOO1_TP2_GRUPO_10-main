@@ -18,18 +18,18 @@ namespace Vistas
         {
             InitializeComponent();
             this.usuarioLogueado = user;
-            aplicar_restricciones(); // Esto activa los permisos apenas abre la ventana
+            aplicar_restricciones();
         }
 
         private void aplicar_restricciones()
         {
-            // Supongamos: 1 = Administrador, 2 = Operador, 3 = Auditor
+           
 
             if (usuarioLogueado.Rol_Codigo == 1) // Administrador
             {
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
-                btnGCliente.Enabled = false; // El pedido dice que Admin es solo Usuarios y Prod
+                btnGCliente.Enabled = false; 
                 btnGVenta.Enabled = false;
             }
             else if (usuarioLogueado.Rol_Codigo == 2) // Operador
@@ -42,7 +42,6 @@ namespace Vistas
             }
             else if (usuarioLogueado.Rol_Codigo == 3) // Auditor
             {
-                // Auditor tiene acceso a TODO según tu consigna
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
                 btnGCliente.Enabled = true;
@@ -109,7 +108,7 @@ namespace Vistas
 
         private void btnGVenta_Click(object sender, EventArgs e)
         {
-            Ventas frmVenta = new Ventas();
+            FrmVentas frmVenta = new FrmVentas();
             frmVenta.Show();
         }
 

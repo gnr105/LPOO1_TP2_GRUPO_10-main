@@ -13,17 +13,10 @@ namespace Vistas
 {
     public partial class Login : Form
     {
-        //List<Usuario> listUsuarios = new List<Usuario>();
-        //List<Rol> listRol = new List<Rol>();
-        //Rol oRol = new Rol(1, "Administrador");
-        //Rol oRol = new Rol(2, "Operador");
-        //Rol oRol = new Rol(3, "Auditor");
 
         public Login()
         {
             InitializeComponent();
-            RolService.CargarRoles();
-            UsuarioService.CargarUsuarios();
 
         }
 
@@ -53,15 +46,6 @@ namespace Vistas
                 txtContraseña.Clear();
                 txtUsuario.Clear();
             }
-
-
-
-            //Solo se ejecuta si el login es correcto
-            //Principal home = new Principal();
-            //home.Show();
-
-            //else
-            //MessageBox de error
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
