@@ -18,30 +18,29 @@ namespace Vistas
         {
             InitializeComponent();
             this.usuarioLogueado = user;
-            aplicar_restricciones(); // Esto activa los permisos apenas abre la ventana
+            aplicar_restricciones();
         }
 
         private void aplicar_restricciones()
         {
-            // Supongamos: 1 = Administrador, 2 = Operador, 3 = Auditor
+            
 
-            if (usuarioLogueado.Rol_Codigo == 1) // Administrador
+            if (usuarioLogueado.Rol_Codigo == 1)
             {
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
-                btnGCliente.Enabled = false; // El pedido dice que Admin es solo Usuarios y Prod
+                btnGCliente.Enabled = false;
                 btnGVenta.Enabled = false;
             }
-            else if (usuarioLogueado.Rol_Codigo == 2) // Operador
+            else if (usuarioLogueado.Rol_Codigo == 2)
             {
                 btnGUsuario.Enabled = false;
                 btnGProduct.Enabled = false;
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
             }
-            else if (usuarioLogueado.Rol_Codigo == 3) // Auditor
+            else if (usuarioLogueado.Rol_Codigo == 3) 
             {
-                // Auditor tiene acceso a TODO según tu consigna
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
                 btnGCliente.Enabled = true;
@@ -52,7 +51,7 @@ namespace Vistas
 
         private void sistemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Hacer lo mismo que el boton aceptar para redirigir al formulario Sistema
+           
         }
 
 
@@ -62,11 +61,17 @@ namespace Vistas
 
             if (rolUsuario != null)
             {
+                
                 this.Text = "Principal - Usuario: " + usuarioLogueado.Usu_ApellidoNombre + " - Rol: " + rolUsuario.Rol_Descripcion;
+
+                lblBienvenida.Text = "Bienvenido! " + usuarioLogueado.Usu_ApellidoNombre + " - " + rolUsuario.Rol_Descripcion;
             }
             else
             {
                 this.Text = "Principal - Usuario: " + usuarioLogueado.Usu_ApellidoNombre;
+
+                
+                lblBienvenida.Text = "Bienvenido! " + usuarioLogueado.Usu_ApellidoNombre;
             }
         }
 
