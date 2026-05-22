@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnGCliente = new System.Windows.Forms.Button();
             this.btnGOS = new System.Windows.Forms.Button();
             this.btnGProduct = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -39,22 +38,14 @@
             this.btnGUsuario = new System.Windows.Forms.Button();
             this.btnGVenta = new System.Windows.Forms.Button();
             this.lblBienvenida = new System.Windows.Forms.Label();
+            this.btnListVentas = new System.Windows.Forms.Button();
+            this.btnGCliente = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnGCliente
-            // 
-            this.btnGCliente.Location = new System.Drawing.Point(100, 101);
-            this.btnGCliente.Name = "btnGCliente";
-            this.btnGCliente.Size = new System.Drawing.Size(125, 23);
-            this.btnGCliente.TabIndex = 0;
-            this.btnGCliente.Text = "Gestion Cliente";
-            this.btnGCliente.UseVisualStyleBackColor = true;
-            this.btnGCliente.Click += new System.EventHandler(this.btnGCliente_Click);
-            // 
             // btnGOS
             // 
-            this.btnGOS.Location = new System.Drawing.Point(360, 101);
+            this.btnGOS.Location = new System.Drawing.Point(287, 109);
             this.btnGOS.Name = "btnGOS";
             this.btnGOS.Size = new System.Drawing.Size(125, 23);
             this.btnGOS.TabIndex = 1;
@@ -64,7 +55,7 @@
             // 
             // btnGProduct
             // 
-            this.btnGProduct.Location = new System.Drawing.Point(100, 174);
+            this.btnGProduct.Location = new System.Drawing.Point(84, 150);
             this.btnGProduct.Name = "btnGProduct";
             this.btnGProduct.Size = new System.Drawing.Size(125, 23);
             this.btnGProduct.TabIndex = 2;
@@ -74,7 +65,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(360, 235);
+            this.btnSalir.Location = new System.Drawing.Point(287, 235);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(125, 23);
             this.btnSalir.TabIndex = 3;
@@ -90,7 +81,7 @@
             this.departamentoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(617, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(494, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,7 +106,7 @@
             // 
             // btnGUsuario
             // 
-            this.btnGUsuario.Location = new System.Drawing.Point(100, 235);
+            this.btnGUsuario.Location = new System.Drawing.Point(84, 210);
             this.btnGUsuario.Name = "btnGUsuario";
             this.btnGUsuario.Size = new System.Drawing.Size(125, 23);
             this.btnGUsuario.TabIndex = 5;
@@ -125,7 +116,7 @@
             // 
             // btnGVenta
             // 
-            this.btnGVenta.Location = new System.Drawing.Point(360, 174);
+            this.btnGVenta.Location = new System.Drawing.Point(287, 174);
             this.btnGVenta.Name = "btnGVenta";
             this.btnGVenta.Size = new System.Drawing.Size(125, 23);
             this.btnGVenta.TabIndex = 6;
@@ -136,23 +127,46 @@
             // lblBienvenida
             // 
             this.lblBienvenida.AutoSize = true;
-            this.lblBienvenida.Location = new System.Drawing.Point(236, 43);
+            this.lblBienvenida.Location = new System.Drawing.Point(177, 35);
+            this.lblBienvenida.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBienvenida.Name = "lblBienvenida";
             this.lblBienvenida.Size = new System.Drawing.Size(0, 13);
             this.lblBienvenida.TabIndex = 7;
+            // 
+            // btnListVentas
+            // 
+            this.btnListVentas.Location = new System.Drawing.Point(278, 48);
+            this.btnListVentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnListVentas.Name = "btnListVentas";
+            this.btnListVentas.Size = new System.Drawing.Size(141, 25);
+            this.btnListVentas.TabIndex = 7;
+            this.btnListVentas.Text = "Listado de Ventas";
+            this.btnListVentas.UseVisualStyleBackColor = true;
+            this.btnListVentas.Click += new System.EventHandler(this.btnListVentas_Click);
+            // 
+            // btnGCliente
+            // 
+            this.btnGCliente.Location = new System.Drawing.Point(84, 78);
+            this.btnGCliente.Name = "btnGCliente";
+            this.btnGCliente.Size = new System.Drawing.Size(125, 23);
+            this.btnGCliente.TabIndex = 8;
+            this.btnGCliente.Text = "Gestion Cliente";
+            this.btnGCliente.UseVisualStyleBackColor = true;
+            this.btnGCliente.Click += new System.EventHandler(this.btnGCliente_Click);
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 329);
+            this.ClientSize = new System.Drawing.Size(494, 314);
+            this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.lblBienvenida);
+            this.Controls.Add(this.btnListVentas);
             this.Controls.Add(this.btnGVenta);
             this.Controls.Add(this.btnGUsuario);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGProduct);
             this.Controls.Add(this.btnGOS);
-            this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Principal";
@@ -167,7 +181,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnGCliente;
         private System.Windows.Forms.Button btnGOS;
         private System.Windows.Forms.Button btnGProduct;
         private System.Windows.Forms.Button btnSalir;
@@ -177,6 +190,11 @@
         private System.Windows.Forms.ToolStripMenuItem departamentoToolStripMenuItem;
         private System.Windows.Forms.Button btnGUsuario;
         private System.Windows.Forms.Button btnGVenta;
+
         private System.Windows.Forms.Label lblBienvenida;
+
+        private System.Windows.Forms.Button btnListVentas;
+        private System.Windows.Forms.Button btnGCliente;
+
     }
 }

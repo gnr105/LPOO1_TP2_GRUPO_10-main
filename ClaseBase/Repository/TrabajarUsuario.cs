@@ -50,12 +50,11 @@ namespace ClaseBase
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
 
-            // Agregué espacios al final de cada línea para evitar que se peguen las palabras
             cmd.CommandText = "SELECT ";
             cmd.CommandText += "Usu_NombreUsuario as 'Usuario', ";
             cmd.CommandText += "Usu_Contraseña as 'Contraseña', ";
-            cmd.CommandText += "Usu_ApellidoNombre as 'ApellidoNombre', "; // Faltaba una coma aquí
-            cmd.CommandText += "Rol_Descripcion as 'Rol', "; // Aquí la coma estaba bien, pero faltaba el espacio
+            cmd.CommandText += "Usu_ApellidoNombre as 'ApellidoNombre', "; 
+            cmd.CommandText += "Rol_Descripcion as 'Rol', "; 
             cmd.CommandText += "Usu_ID, U.Rol_Codigo ";
             cmd.CommandText += "FROM Usuario as U ";
             cmd.CommandText += "LEFT JOIN Roles as R ON (R.Rol_Codigo=U.Rol_Codigo)";
@@ -78,8 +77,8 @@ namespace ClaseBase
             cmd.CommandText = "SELECT ";
             cmd.CommandText += "Usu_NombreUsuario as 'Usuario', ";
             cmd.CommandText += "Usu_Contraseña as 'Contraseña', ";
-            cmd.CommandText += "Usu_ApellidoNombre as 'ApellidoNombre', "; // Faltaba una coma aquí
-            cmd.CommandText += "Rol_Descripcion as 'Rol', "; // Aquí la coma estaba bien, pero faltaba el espacio
+            cmd.CommandText += "Usu_ApellidoNombre as 'ApellidoNombre', "; 
+            cmd.CommandText += "Rol_Descripcion as 'Rol', "; 
             cmd.CommandText += "Usu_ID, U.Rol_Codigo ";
             cmd.CommandText += "FROM Usuario as U ";
             cmd.CommandText += "LEFT JOIN Roles as R ON (R.Rol_Codigo=U.Rol_Codigo)";

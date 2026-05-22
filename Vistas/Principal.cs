@@ -23,13 +23,14 @@ namespace Vistas
 
         private void aplicar_restricciones()
         {
-            
+
 
             if (usuarioLogueado.Rol_Codigo == 1)
             {
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
                 btnGCliente.Enabled = false;
+                btnGCliente.Enabled = false; 
                 btnGVenta.Enabled = false;
             }
             else if (usuarioLogueado.Rol_Codigo == 2)
@@ -38,6 +39,7 @@ namespace Vistas
                 btnGProduct.Enabled = false;
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
+                btnListVentas.Enabled = true;
             }
             else if (usuarioLogueado.Rol_Codigo == 3) 
             {
@@ -46,6 +48,7 @@ namespace Vistas
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
                 btnGOS.Enabled = true;
+                btnListVentas.Enabled = true;
             }
         }
 
@@ -112,8 +115,14 @@ namespace Vistas
 
         private void btnGVenta_Click(object sender, EventArgs e)
         {
-            Ventas frmVenta = new Ventas();
+            FrmVentas frmVenta = new FrmVentas();
             frmVenta.Show();
+        }
+
+        private void btnListVentas_Click(object sender, EventArgs e)
+        {
+            FrmListVenta frmListVentas = new FrmListVenta();
+            frmListVentas.Show();
         }
     }
 }

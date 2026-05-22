@@ -1,6 +1,6 @@
 ﻿namespace Vistas
 {
-    partial class Ventas
+    partial class FrmListVentas
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FrmListVentas
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Ventas";
+            this.ClientSize = new System.Drawing.Size(652, 582);
+            this.Name = "FrmListVentas";
+            this.Text = "FrmListVentas";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

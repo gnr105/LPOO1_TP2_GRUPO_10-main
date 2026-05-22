@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Vistas
 {
-    public partial class Ventas : Form
+    public partial class FrmListVentas : Form
     {
-        public Ventas()
+        public FrmListVentas()
         {
             InitializeComponent();
         }
