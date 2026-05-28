@@ -48,6 +48,7 @@
             this.dgwClientes = new System.Windows.Forms.DataGridView();
             this.txtPattern = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnListarOrdenado = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwClientes)).BeginInit();
             this.SuspendLayout();
@@ -244,11 +245,22 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // btnListarOrdenado
+            // 
+            this.btnListarOrdenado.Location = new System.Drawing.Point(463, 324);
+            this.btnListarOrdenado.Name = "btnListarOrdenado";
+            this.btnListarOrdenado.Size = new System.Drawing.Size(105, 23);
+            this.btnListarOrdenado.TabIndex = 19;
+            this.btnListarOrdenado.Text = "Listar en Orden";
+            this.btnListarOrdenado.UseVisualStyleBackColor = true;
+            this.btnListarOrdenado.Click += new System.EventHandler(this.btnListarOrdenado_Click);
+            // 
             // Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1090, 375);
+            this.Controls.Add(this.btnListarOrdenado);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtPattern);
             this.Controls.Add(this.dgwClientes);
@@ -286,5 +298,6 @@
         private System.Windows.Forms.DataGridView dgwClientes;
         private System.Windows.Forms.TextBox txtPattern;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnListarOrdenado;
     }
 }

@@ -17,32 +17,32 @@ namespace Vistas
             InitializeComponent();
         }
 
+        private void Productos_Load(object sender, EventArgs e)
+        {
+
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
-            {
-              
-                Producto oProducto = new Producto();
-           
-                oProducto.Prod_Codigo = txtCodigoProd.Text;
-                oProducto.Prod_Categoria = txtCategoriaProd.Text;
-                oProducto.Prod_Descripcion = txtDescripcionProd.Text;
+            Producto oProducto = new Producto();
 
-                oProducto.Prod_Precio = Convert.ToDecimal(txtPrecioProd.Text);
+            oProducto.Prod_Codigo = txtCodigoProd.Text;
+            oProducto.Prod_Categoria = txtCategoriaProd.Text;
+            oProducto.Prod_Descripcion = txtDescripcionProd.Text;
+            oProducto.Prod_Precio = Convert.ToDecimal(txtPrecioProd.Text);
 
-                string mensaje = string.Format("Producto guardado correctamente:\nCódigo: {0}\nDescripción: {1}\nPrecio: {2:C}",
-                                                oProducto.Prod_Codigo,
-                                                oProducto.Prod_Descripcion,
-                                                oProducto.Prod_Precio);
+            TrabajarProducto.insert_producto(oProducto);
 
-                MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string mensaje = string.Format("Producto guardado correctamente:\nCódigo: {0}\nDescripción: {1}\nPrecio: {2:C}",
+                                            oProducto.Prod_Codigo,
+                                            oProducto.Prod_Descripcion,
+                                            oProducto.Prod_Precio);
 
-                LimpiarCampos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al guardar: Verifique que el precio sea un número válido. " + ex.Message);
-            }
+            MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            LimpiarCampos();
+
+
+            // btnListar_Click(null, null); 
         }
 
         private void LimpiarCampos()
@@ -70,10 +70,20 @@ namespace Vistas
             this.Close();
         }
 
-        private void Productos_Load(object sender, EventArgs e)
+        private void btnListar_Click(object sender, EventArgs e)
         {
+            string orden = "";
 
+            if (rbCategoria.Checked)
+            {
+                orden = "Categoria";
+            }
+            else if (rbDescripcion.Checked)
+            {
+                orden = "Descripcion";
+            }
+
+            dgwProductos.DataSource = TrabajarProducto.list_productos_ordered(orden);
         }
-
     }
 }

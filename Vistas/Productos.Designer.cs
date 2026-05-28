@@ -39,6 +39,11 @@
             this.txtCategoriaProd = new System.Windows.Forms.TextBox();
             this.txtDescripcionProd = new System.Windows.Forms.TextBox();
             this.txtPrecioProd = new System.Windows.Forms.TextBox();
+            this.dgwProductos = new System.Windows.Forms.DataGridView();
+            this.btnListar = new System.Windows.Forms.Button();
+            this.rbCategoria = new System.Windows.Forms.RadioButton();
+            this.rbDescripcion = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -136,11 +141,55 @@
             this.txtPrecioProd.Size = new System.Drawing.Size(185, 20);
             this.txtPrecioProd.TabIndex = 10;
             // 
+            // dgwProductos
+            // 
+            this.dgwProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwProductos.Location = new System.Drawing.Point(470, 12);
+            this.dgwProductos.Name = "dgwProductos";
+            this.dgwProductos.Size = new System.Drawing.Size(591, 221);
+            this.dgwProductos.TabIndex = 11;
+            // 
+            // btnListar
+            // 
+            this.btnListar.Location = new System.Drawing.Point(470, 272);
+            this.btnListar.Name = "btnListar";
+            this.btnListar.Size = new System.Drawing.Size(105, 23);
+            this.btnListar.TabIndex = 12;
+            this.btnListar.Text = "Listar Productos";
+            this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
+            // 
+            // rbCategoria
+            // 
+            this.rbCategoria.AutoSize = true;
+            this.rbCategoria.Checked = true;
+            this.rbCategoria.Location = new System.Drawing.Point(640, 277);
+            this.rbCategoria.Name = "rbCategoria";
+            this.rbCategoria.Size = new System.Drawing.Size(89, 17);
+            this.rbCategoria.TabIndex = 13;
+            this.rbCategoria.TabStop = true;
+            this.rbCategoria.Text = "Por Categoria";
+            this.rbCategoria.UseVisualStyleBackColor = true;
+            // 
+            // rbDescripcion
+            // 
+            this.rbDescripcion.AutoSize = true;
+            this.rbDescripcion.Location = new System.Drawing.Point(784, 277);
+            this.rbDescripcion.Name = "rbDescripcion";
+            this.rbDescripcion.Size = new System.Drawing.Size(100, 17);
+            this.rbDescripcion.TabIndex = 14;
+            this.rbDescripcion.Text = "Por Descripcion";
+            this.rbDescripcion.UseVisualStyleBackColor = true;
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 356);
+            this.ClientSize = new System.Drawing.Size(1105, 356);
+            this.Controls.Add(this.rbDescripcion);
+            this.Controls.Add(this.rbCategoria);
+            this.Controls.Add(this.btnListar);
+            this.Controls.Add(this.dgwProductos);
             this.Controls.Add(this.txtPrecioProd);
             this.Controls.Add(this.txtDescripcionProd);
             this.Controls.Add(this.txtCategoriaProd);
@@ -155,6 +204,7 @@
             this.Name = "Productos";
             this.Text = "Productos";
             this.Load += new System.EventHandler(this.Productos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgwProductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +223,9 @@
         private System.Windows.Forms.TextBox txtCategoriaProd;
         private System.Windows.Forms.TextBox txtDescripcionProd;
         private System.Windows.Forms.TextBox txtPrecioProd;
+        private System.Windows.Forms.DataGridView dgwProductos;
+        private System.Windows.Forms.Button btnListar;
+        private System.Windows.Forms.RadioButton rbCategoria;
+        private System.Windows.Forms.RadioButton rbDescripcion;
     }
 }

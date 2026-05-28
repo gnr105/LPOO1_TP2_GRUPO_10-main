@@ -34,12 +34,12 @@ namespace Vistas
 
             TrabajarCliente.insert_cliente(oCliente);
 
-            MessageBox.Show("Cliente registrado con éxito"); // Feedback
+            MessageBox.Show("Cliente registrado con éxito");
 
             // Limpiar campos
             limpiar_campos();
 
-            load_clientes(); // Esto ahora funcionará sin el error del 'as'
+            load_clientes();
         }
 
         private void btnGuardar_MouseHover(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace Vistas
 
         private void dgwClientes_CurrentCellChanged(object sender, EventArgs e)
         {
-            // Agregamos esta validación extra para evitar errores al cargar
+
             if (dgwClientes.CurrentRow != null && dgwClientes.CurrentRow.Cells["DNI"].Value != DBNull.Value)
             {
                 txtDNI.Text = dgwClientes.CurrentRow.Cells["DNI"].Value.ToString();
@@ -96,8 +96,6 @@ namespace Vistas
                 txtApellido.Text = dgwClientes.CurrentRow.Cells["Apellido"].Value.ToString();
                 txtNombre.Text = dgwClientes.CurrentRow.Cells["Nombre"].Value.ToString();
                 txtDireccion.Text = dgwClientes.CurrentRow.Cells["Direccion"].Value.ToString();
-
-                // Fíjate que aquí dice "Obrasocial", igual que en el SELECT de arriba
                 txtObraSocial.Text = dgwClientes.CurrentRow.Cells["Obrasocial"].Value.ToString();
                 txtNroCarnet.Text = dgwClientes.CurrentRow.Cells["NroCarnet"].Value.ToString();
             }
@@ -133,7 +131,7 @@ namespace Vistas
             txtDireccion.Text = "";
             txtObraSocial.Text = "";
             txtNroCarnet.Text = "";
-            txtDNI.Enabled = true; // Lo habilitamos para una nueva carga
+            txtDNI.Enabled = true;
             txtDNI.Focus();
         }
 
@@ -162,5 +160,12 @@ namespace Vistas
             else
                 load_clientes();
         }
+
+        private void btnListarOrdenado_Click(object sender, EventArgs e)
+        {
+            dgwClientes.DataSource = TrabajarCliente.list_clientes_ordenados();
+        }
+
+
     }
 }
