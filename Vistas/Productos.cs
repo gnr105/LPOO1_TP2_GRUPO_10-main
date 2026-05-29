@@ -44,6 +44,63 @@ namespace Vistas
 
             // btnListar_Click(null, null); 
         }
+        
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (txtCodigoProd.Text == "")
+            {
+                MessageBox.Show("Debe seleccionar un producto.");
+                return;
+            }
+
+            decimal precio;
+
+            if (!decimal.TryParse(txtPrecioProd.Text, out precio))
+            {
+                MessageBox.Show("El precio ingresado no es válido.");
+                return;
+            }
+
+            Producto oProducto = new Producto();
+
+            oProducto.Prod_Codigo = txtCodigoProd.Text;
+            oProducto.Prod_Categoria = txtCategoriaProd.Text;
+            oProducto.Prod_Descripcion = txtDescripcionProd.Text;
+            oProducto.Prod_Precio = precio;
+
+            TrabajarProducto.update_producto(oProducto);
+
+            MessageBox.Show("Producto actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            LimpiarCampos();
+            btnListar_Click(null, null);
+        }
+        
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (txtCodigoProd.Text == "")
+            {
+                MessageBox.Show("Debe seleccionar un producto.");
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show(
+                "¿Está seguro que desea eliminar este producto?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                TrabajarProducto.delete_producto(txtCodigoProd.Text);
+
+                MessageBox.Show("Producto eliminado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LimpiarCampos();
+                btnListar_Click(null, null);
+            }
+        }
 
         private void LimpiarCampos()
         {
@@ -84,6 +141,17 @@ namespace Vistas
             }
 
             dgwProductos.DataSource = TrabajarProducto.list_productos_ordered(orden);
+        }
+        
+        private void dgwProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                txtCodigoProd.Text = dgwProductos.Rows[e.RowIndex].Cells["Codigo"].Value.ToString();
+                txtCategoriaProd.Text = dgwProductos.Rows[e.RowIndex].Cells["Categoria"].Value.ToString();
+                txtDescripcionProd.Text = dgwProductos.Rows[e.RowIndex].Cells["Descripcion"].Value.ToString();
+                txtPrecioProd.Text = dgwProductos.Rows[e.RowIndex].Cells["Precio"].Value.ToString();
+            }
         }
     }
 }
