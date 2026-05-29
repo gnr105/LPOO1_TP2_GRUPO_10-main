@@ -62,6 +62,24 @@ namespace ClaseBase
 
             return dt;
         }
+        
+        public static DataTable listar_ventas_x_cliente(string dni)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "listar_ventas_x_cliente_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@cli_dni", dni);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            return dt;
+        }
 
         public static void insert_venta(DateTime fecha, string dni, DataTable dtDetalles)
         {

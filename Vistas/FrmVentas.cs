@@ -101,6 +101,18 @@ namespace Vistas
                 MessageBox.Show("Debe agregar al menos un producto.");
             }
         }
+        
+        private void btnBuscarVentas_Click(object sender, EventArgs e)
+        {
+            if (cmbClientes.SelectedValue != null)
+            {
+                string dni = cmbClientes.SelectedValue.ToString();
+                dgvDetalle.DataSource = TrabajarVenta.listar_ventas_x_cliente(dni);            }
+            else
+            {
+                MessageBox.Show("Seleccione un cliente.");
+            }
+        }
 
         private void configurar_grilla()
         {

@@ -50,6 +50,25 @@ BEGIN
 END
 
 
+CREATE PROCEDURE dbo.listar_ventas_x_cliente_sp
+(
+    @cli_dni varchar(20)
+)
+AS
+BEGIN
+    SELECT 
+        V.Ven_Nro AS 'Nro_Venta',
+        V.Ven_Fecha AS 'Fecha',
+        C.Cli_DNI AS 'DNI',
+        C.Cli_Apellido AS 'Apellido',
+        C.Cli_Nombre AS 'Nombre'
+    FROM Venta V
+    INNER JOIN Cliente C ON C.Cli_DNI = V.Cli_DNI
+    WHERE C.Cli_DNI = @cli_dni
+    ORDER BY V.Ven_Fecha DESC
+END
+
+
 CREATE PROCEDURE dbo.ActualizarProducto
     @codigo VARCHAR(50),
     @categoria VARCHAR(50),

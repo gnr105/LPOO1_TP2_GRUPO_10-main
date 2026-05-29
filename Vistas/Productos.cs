@@ -130,6 +130,12 @@ namespace Vistas
         private void btnListar_Click(object sender, EventArgs e)
         {
             string orden = "";
+            
+            if (!rbCategoria.Checked && !rbDescripcion.Checked)
+            {
+                MessageBox.Show("Seleccione un criterio de ordenamiento.");
+                return;
+            }
 
             if (rbCategoria.Checked)
             {
