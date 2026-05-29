@@ -1,0 +1,75 @@
+VISTAS
+vw_Clientes
+SELECT 
+    Cli_DNI as 'DNI', 
+    Cli_Apellido as 'Apellido', 
+    Cli_Nombre as 'Nombre', 
+    Cli_Direccion as 'Direccion', 
+    OS_CUIT as 'Obrasocial', 
+    Cli_NroCarnet as 'NroCarnet' 
+FROM Cliente;
+
+vw_Productos 
+SELECT 
+    Prod_Codigo AS 'Codigo',
+    Prod_Categoria AS 'Categoria',
+    Prod_Descripcion AS 'Descripcion',
+    Prod_Precio AS 'Precio'
+FROM Producto;
+
+
+PROCEDURES
+
+CREATE PROCEDURE dbo.ListarClientesOrdenados
+AS
+BEGIN
+    SELECT * FROM vw_Clientes ORDER BY Apellido ASC;
+END
+
+
+CREATE PROCEDURE dbo.InsertarProducto
+    @codigo VARCHAR(50),
+    @categoria VARCHAR(50),
+    @descripcion VARCHAR(100),
+    @precio DECIMAL(10,2)
+AS
+BEGIN
+    INSERT INTO Producto(Prod_Codigo, Prod_Categoria, Prod_Descripcion, Prod_Precio)
+    VALUES (@codigo, @categoria, @descripcion, @precio);
+END
+
+
+CREATE PROCEDURE dbo.ListarProductosOrdenados
+    @Orden VARCHAR(20)
+AS
+BEGIN
+    IF @Orden = 'Categoria'
+        SELECT * FROM vw_Productos ORDER BY Categoria ASC;
+    ELSE 
+        SELECT * FROM vw_Productos ORDER BY Descripcion ASC;
+END
+
+
+CREATE PROCEDURE dbo.ActualizarProducto
+    @codigo VARCHAR(50),
+    @categoria VARCHAR(50),
+    @descripcion VARCHAR(100),
+    @precio DECIMAL(10,2)
+AS
+BEGIN
+    UPDATE Producto
+    SET 
+        Prod_Categoria = @categoria,
+        Prod_Descripcion = @descripcion,
+        Prod_Precio = @precio
+    WHERE Prod_Codigo = @codigo;
+END
+
+
+CREATE PROCEDURE dbo.EliminarProducto
+    @codigo VARCHAR(50)
+AS
+BEGIN
+    DELETE FROM Producto
+    WHERE Prod_Codigo = @codigo;
+END
