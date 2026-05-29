@@ -27,7 +27,6 @@ BEGIN
 END
 
 
-
 CREATE PROCEDURE dbo.InsertarProducto
     @codigo VARCHAR(50),
     @categoria VARCHAR(50),
@@ -48,4 +47,29 @@ BEGIN
         SELECT * FROM vw_Productos ORDER BY Categoria ASC;
     ELSE 
         SELECT * FROM vw_Productos ORDER BY Descripcion ASC;
+END
+
+
+CREATE PROCEDURE dbo.ActualizarProducto
+    @codigo VARCHAR(50),
+    @categoria VARCHAR(50),
+    @descripcion VARCHAR(100),
+    @precio DECIMAL(10,2)
+AS
+BEGIN
+    UPDATE Producto
+    SET 
+        Prod_Categoria = @categoria,
+        Prod_Descripcion = @descripcion,
+        Prod_Precio = @precio
+    WHERE Prod_Codigo = @codigo;
+END
+
+
+CREATE PROCEDURE dbo.EliminarProducto
+    @codigo VARCHAR(50)
+AS
+BEGIN
+    DELETE FROM Producto
+    WHERE Prod_Codigo = @codigo;
 END

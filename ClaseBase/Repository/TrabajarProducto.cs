@@ -45,5 +45,40 @@ namespace ClaseBase
 
             return dt;
         }
+        
+        public static void update_producto(Producto prod)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "ActualizarProducto";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@codigo", prod.Prod_Codigo);
+            cmd.Parameters.AddWithValue("@categoria", prod.Prod_Categoria);
+            cmd.Parameters.AddWithValue("@descripcion", prod.Prod_Descripcion);
+            cmd.Parameters.AddWithValue("@precio", prod.Prod_Precio);
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+        }
+        
+        public static void delete_producto(string codigo)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "EliminarProducto";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@codigo", codigo);
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+        }
     }
 }
