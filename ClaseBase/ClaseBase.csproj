@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>opticaDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Repository\TrabajarProducto.cs" />
     <Compile Include="Repository\RolService.cs" />
     <Compile Include="Repository\TrabajarVenta.cs" />
     <Compile Include="Enttity\Cliente.cs" />

@@ -19,15 +19,34 @@ namespace Vistas
 
         private void FrmVenta_Load(object sender, EventArgs e)
         {
-            load_ventas();
+            load_combo_clientes();
+        }
+        private void load_combo_clientes()
+        {
+            cmbClientes.DisplayMember = "NombreCompleto";
+            cmbClientes.ValueMember = "Cli_DNI";
+            cmbClientes.DataSource = TrabajarVenta.list_clientes();        
         }
 
         private void load_ventas()
         {
             dgwVenta.DataSource = TrabajarVenta.list_venta();
         }
-
         
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (cmbClientes.SelectedValue != null)
+            {
+                string dni = cmbClientes.SelectedValue.ToString();
+                dgwVenta.DataSource = TrabajarVenta.listar_ventas_x_cliente(dni);
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un cliente.");
+            }
+        }
+
+
         private void btnSalir_MouseHover(object sender, EventArgs e)
         {
             btnSalir.BackColor = Color.PaleVioletRed;
@@ -36,6 +55,7 @@ namespace Vistas
             btnSalir.Font = new Font(btnSalir.Font, FontStyle.Bold);
         }
 
+
         private void btnSalir_MouseLeave(object sender, EventArgs e)
         {
             btnSalir.BackColor = Color.White;
@@ -43,14 +63,18 @@ namespace Vistas
             btnSalir.FlatStyle = FlatStyle.Standard;
             btnSalir.Font = new Font(btnSalir.Font, FontStyle.Regular);
         }
+        
+        
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        
+        private void label2_Click(object sender, EventArgs e)
+        {
 
+        }
         
        
     }

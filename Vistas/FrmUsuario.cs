@@ -12,9 +12,12 @@ namespace Vistas
 {
     public partial class FrmUsuario : Form
     {
-        public FrmUsuario()
+        private Usuario usAct;
+
+        public FrmUsuario(Usuario user)
         {
             InitializeComponent();
+            usAct = user;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -130,8 +133,21 @@ namespace Vistas
             if (dgwUsuarios.CurrentRow != null)
             {
                 int idEliminar = (int)dgwUsuarios.CurrentRow.Cells["Usu_ID"].Value;
+                
+                //TrabajarUsuario.delete_usuario(idEliminar);
+                string validacion = TrabajarUsuario.validar_usuario(
+                    idEliminar,
+                    usAct.Usu_ID
+                );
+
+                if (validacion != "")
+                {
+                    MessageBox.Show(validacion);
+                    return;
+                }
 
                 TrabajarUsuario.delete_usuario(idEliminar);
+
                 MessageBox.Show("Usuario eliminado");
                 load_usuarios();
             }

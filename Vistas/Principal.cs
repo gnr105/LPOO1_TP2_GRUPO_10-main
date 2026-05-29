@@ -91,7 +91,7 @@ namespace Vistas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FrmUsuario frmUsuario = new FrmUsuario();
+            FrmUsuario frmUsuario = new FrmUsuario(usuarioLogueado);
             frmUsuario.Show();
         }
 

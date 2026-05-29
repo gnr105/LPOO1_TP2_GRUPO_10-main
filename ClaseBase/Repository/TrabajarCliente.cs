@@ -37,10 +37,9 @@ namespace ClaseBase
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
 
-            // IMPORTANTE: Los alias deben coincidir con los del formulario
             cmd.CommandText = "SELECT Cli_DNI as 'DNI', Cli_Apellido as 'Apellido', " +
                               "Cli_Nombre as 'Nombre', Cli_Direccion as 'Direccion', " +
-                              "OS_CUIT as 'Obrasocial', Cli_NroCarnet as 'NroCarnet' " + // Usamos 'Obrasocial'
+                              "OS_CUIT as 'Obrasocial', Cli_NroCarnet as 'NroCarnet' " +
                               "FROM Cliente";
 
             cmd.CommandType = CommandType.Text;
@@ -50,13 +49,26 @@ namespace ClaseBase
             da.Fill(dt);
             return dt;
         }
+        public static DataTable list_clientes_ordenados()
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
 
+            cmd.CommandText = "listarClientesOrdenados";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            return dt;
+        }
         public static DataTable search_clientes(string pattern)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
 
-            // Usamos LIKE para buscar por DNI o Apellido
             cmd.CommandText = "SELECT Cli_DNI as 'DNI', Cli_Apellido as 'Apellido', " +
                               "Cli_Nombre as 'Nombre', Cli_Direccion as 'Direccion', " +
                               "OS_CUIT as 'Obrasocial', Cli_NroCarnet as 'NroCarnet' " +
@@ -72,7 +84,6 @@ namespace ClaseBase
             return dt;
         }
 
-        // Método para Modificar
         public static void update_cliente(Cliente client)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
@@ -80,7 +91,7 @@ namespace ClaseBase
 
             cmd.CommandText = "UPDATE Cliente SET Cli_Apellido=@ape, Cli_Nombre=@nom, " +
                               "Cli_Direccion=@dir, OS_CUIT=@os, Cli_NroCarnet=@ncar " +
-                              "WHERE Cli_DNI=@dni"; // Usamos el DNI para identificar al cliente
+                              "WHERE Cli_DNI=@dni";
 
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
@@ -97,7 +108,6 @@ namespace ClaseBase
             cnn.Close();
         }
 
-        // Método para Eliminar
         public static void delete_cliente(string dni)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);

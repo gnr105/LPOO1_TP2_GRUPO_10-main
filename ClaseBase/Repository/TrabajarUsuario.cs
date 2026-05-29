@@ -130,6 +130,21 @@ namespace ClaseBase
             cnn.Close();
         }
 
+        public static string validar_usuario(int idEliminar, int idLog)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            cnn.Open();
+
+            if (idEliminar == idLog)
+            {
+                cnn.Close();
+                return "No puedes eliminar tu propia cuenta.";
+            }
+
+            cnn.Close();
+            return "";
+        }
+
         public static Usuario validar_login(string user, string pass)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
