@@ -20,6 +20,8 @@ namespace Vistas
         private void FrmVenta_Load(object sender, EventArgs e)
         {
             load_combo_clientes();
+
+            load_ventas();
         }
         private void load_combo_clientes()
         {

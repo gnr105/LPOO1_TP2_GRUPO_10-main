@@ -72,7 +72,7 @@ namespace ClaseBase
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
 
-            cmd.Parameters.AddWithValue("@cli_dni", dni);
+            cmd.Parameters.AddWithValue("@dni", dni);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

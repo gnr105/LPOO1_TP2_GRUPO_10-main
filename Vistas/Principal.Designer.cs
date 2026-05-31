@@ -40,6 +40,7 @@
             this.lblBienvenida = new System.Windows.Forms.Label();
             this.btnListVentas = new System.Windows.Forms.Button();
             this.btnGCliente = new System.Windows.Forms.Button();
+            this.btnListProd = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             // 
             // btnGProduct
             // 
-            this.btnGProduct.Location = new System.Drawing.Point(84, 150);
+            this.btnGProduct.Location = new System.Drawing.Point(84, 122);
             this.btnGProduct.Name = "btnGProduct";
             this.btnGProduct.Size = new System.Drawing.Size(125, 23);
             this.btnGProduct.TabIndex = 2;
@@ -136,7 +137,7 @@
             // btnListVentas
             // 
             this.btnListVentas.Location = new System.Drawing.Point(278, 48);
-            this.btnListVentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnListVentas.Margin = new System.Windows.Forms.Padding(2);
             this.btnListVentas.Name = "btnListVentas";
             this.btnListVentas.Size = new System.Drawing.Size(141, 25);
             this.btnListVentas.TabIndex = 7;
@@ -154,11 +155,22 @@
             this.btnGCliente.UseVisualStyleBackColor = true;
             this.btnGCliente.Click += new System.EventHandler(this.btnGCliente_Click);
             // 
+            // btnListProd
+            // 
+            this.btnListProd.Location = new System.Drawing.Point(84, 162);
+            this.btnListProd.Name = "btnListProd";
+            this.btnListProd.Size = new System.Drawing.Size(125, 23);
+            this.btnListProd.TabIndex = 9;
+            this.btnListProd.Text = "Listado deProductos";
+            this.btnListProd.UseVisualStyleBackColor = true;
+            this.btnListProd.Click += new System.EventHandler(this.btnListProd_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 314);
+            this.Controls.Add(this.btnListProd);
             this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.lblBienvenida);
             this.Controls.Add(this.btnListVentas);
@@ -195,6 +207,7 @@
 
         private System.Windows.Forms.Button btnListVentas;
         private System.Windows.Forms.Button btnGCliente;
+        private System.Windows.Forms.Button btnListProd;
 
     }
 }

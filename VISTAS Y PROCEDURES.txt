@@ -17,16 +17,26 @@ SELECT
     Prod_Precio AS 'Precio'
 FROM Producto;
 
-
+vw_Productos_Vendidos
+SELECT       
+	dbo.Producto.Prod_Codigo, 
+	dbo.Producto.Prod_Categoria, 
+	dbo.Producto.Prod_Descripcion, 
+	dbo.Producto.Prod_Precio, 
+	dbo.VentaDetalle.Ven_Nro, 
+	dbo.Venta.Ven_Fecha
+FROM            
+	dbo.Producto INNER JOIN
+        ddbo.Venta ON dbo.VentaDetalle.Ven_Nro = dbo.Venta.Ven_Nro
+-------------------------------------------------------------
 PROCEDURES
-
+-------------------------------------------------------------
 CREATE PROCEDURE dbo.ListarClientesOrdenados
 AS
 BEGIN
     SELECT * FROM vw_Clientes ORDER BY Apellido ASC;
 END
-
-
+--------------------------------------------------------------
 CREATE PROCEDURE dbo.InsertarProducto
     @codigo VARCHAR(50),
     @categoria VARCHAR(50),
@@ -37,8 +47,7 @@ BEGIN
     INSERT INTO Producto(Prod_Codigo, Prod_Categoria, Prod_Descripcion, Prod_Precio)
     VALUES (@codigo, @categoria, @descripcion, @precio);
 END
-
-
+--------------------------------------------------------------
 CREATE PROCEDURE dbo.ListarProductosOrdenados
     @Orden VARCHAR(20)
 AS
@@ -48,8 +57,7 @@ BEGIN
     ELSE 
         SELECT * FROM vw_Productos ORDER BY Descripcion ASC;
 END
-
-
+---------------------------------------------------------------
 CREATE PROCEDURE dbo.ActualizarProducto
     @codigo VARCHAR(50),
     @categoria VARCHAR(50),
@@ -65,7 +73,7 @@ BEGIN
     WHERE Prod_Codigo = @codigo;
 END
 
-
+----------------------------------------------
 CREATE PROCEDURE dbo.EliminarProducto
     @codigo VARCHAR(50)
 AS
@@ -73,3 +81,47 @@ BEGIN
     DELETE FROM Producto
     WHERE Prod_Codigo = @codigo;
 END
+-----------------------------------------------
+PROCEDURE dbo.ListarProductosPorFecha
+	@fechaIni DateTime,
+	@fechaFin DateTime
+AS
+	BEGIN
+		SELECT *
+		FROM vw_Productos_Vendidos as VP
+		WHERE VP.Ven_Fecha BETWEEN @fechaIni AND DATEADD(day,1,@fechaFin)
+	END
+----------------------------------------------
+PROCEDURE dbo.listar_ventas_x_cliente_sp
+	@dni VARCHAR (20)
+AS
+	SELECT 
+		Ven_Nro as 'Nro_Venta',
+		Ven_Fecha as 'Fecha',
+		V.Cli_DNI as 'DNI', 
+		C.Cli_Apellido as 'Apellido', 
+		C.Cli_Nombre as 'Nombre'
+    FROM Venta as V
+	INNER JOIN Cliente as C ON V.cli_DNI = C.Cli_DNI
+    WHERE V.Cli_DNI = @dni
+---------------------------------------------------
+PROCEDURE dbo.listarProductos
+AS
+	SELECT *
+	FROM vw_Productos_Vendidos
+---------------------------------------------------
+PROCEDURE listar_ventas_por_fechas_sp
+    @fechaDesde DATETIME,
+    @fechaHasta DATETIME
+AS
+BEGIN
+    SELECT Ven_Nro as 'Nro_Venta', 
+           Ven_Fecha as 'Fecha', 
+           V.Cli_DNI as 'DNI', 
+           Cli_Apellido as 'Apellido', 
+           Cli_Nombre as 'Nombre' 
+    FROM Venta as V 
+    LEFT JOIN Cliente as C ON (C.Cli_DNI = V.Cli_DNI)
+    WHERE Ven_Fecha BETWEEN @fechaDesde AND @fechaHasta
+END
+---------------------------------------------------
