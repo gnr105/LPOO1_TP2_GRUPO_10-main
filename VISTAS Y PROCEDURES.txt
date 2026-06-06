@@ -1,75 +1,202 @@
-VISTAS
-vw_Clientes
+IF OBJECT_ID('dbo.vw_Clientes', 'V') IS NOT NULL DROP VIEW dbo.vw_Clientes;
+GO
+CREATE VIEW dbo.vw_Clientes AS
 SELECT 
-    Cli_DNI as 'DNI', 
-    Cli_Apellido as 'Apellido', 
-    Cli_Nombre as 'Nombre', 
-    Cli_Direccion as 'Direccion', 
-    OS_CUIT as 'Obrasocial', 
-    Cli_NroCarnet as 'NroCarnet' 
+    Cli_DNI AS [DNI], 
+    Cli_Apellido AS [Apellido], 
+    Cli_Nombre AS [Nombre], 
+    Cli_Direccion AS [Direccion], 
+    OS_CUIT AS [Obrasocial], 
+    Cli_NroCarnet AS [NroCarnet] 
 FROM Cliente;
+GO
 
-vw_Productos 
+IF OBJECT_ID('dbo.vw_Productos', 'V') IS NOT NULL DROP VIEW dbo.vw_Productos;
+GO
+CREATE VIEW dbo.vw_Productos AS
 SELECT 
-    Prod_Codigo AS 'Codigo',
-    Prod_Categoria AS 'Categoria',
-    Prod_Descripcion AS 'Descripcion',
-    Prod_Precio AS 'Precio'
+    Prod_Codigo AS [Codigo], 
+    Prod_Categoria AS [Categoria], 
+    Prod_Descripcion AS [Descripcion], 
+    Prod_Precio AS [Precio] 
 FROM Producto;
+GO
 
-
-PROCEDURES
-
-CREATE PROCEDURE dbo.ListarClientesOrdenados
-AS
-BEGIN
-    SELECT * FROM vw_Clientes ORDER BY Apellido ASC;
+-- PUNTO 1: Clientes ordenados por apellido
+IF OBJECT_ID('dbo.ListarClientesOrdenados', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarClientesOrdenados;
+GO
+CREATE PROCEDURE dbo.ListarClientesOrdenados AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT * FROM vw_Clientes ORDER BY Apellido ASC; 
 END
+GO
 
-
-CREATE PROCEDURE dbo.InsertarProducto
-    @codigo VARCHAR(50),
-    @categoria VARCHAR(50),
-    @descripcion VARCHAR(100),
-    @precio DECIMAL(10,2)
-AS
-BEGIN
-    INSERT INTO Producto(Prod_Codigo, Prod_Categoria, Prod_Descripcion, Prod_Precio)
-    VALUES (@codigo, @categoria, @descripcion, @precio);
-END
-
-
-CREATE PROCEDURE dbo.ListarProductosOrdenados
-    @Orden VARCHAR(20)
-AS
-BEGIN
-    IF @Orden = 'Categoria'
-        SELECT * FROM vw_Productos ORDER BY Categoria ASC;
+-- PUNTO 2: Productos ordenados por Categoria o Descripcion
+IF OBJECT_ID('dbo.ListarProductosOrdenados', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarProductosOrdenados;
+GO
+CREATE PROCEDURE dbo.ListarProductosOrdenados @Orden VARCHAR(20) AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    IF @Orden = 'Categoria' 
+        SELECT * FROM vw_Productos ORDER BY Categoria ASC; 
     ELSE 
-        SELECT * FROM vw_Productos ORDER BY Descripcion ASC;
+        SELECT * FROM vw_Productos ORDER BY Descripcion ASC; 
 END
+GO
 
-
-CREATE PROCEDURE dbo.ActualizarProducto
-    @codigo VARCHAR(50),
-    @categoria VARCHAR(50),
-    @descripcion VARCHAR(100),
+-- PUNTO 3: ABM de Productos
+IF OBJECT_ID('dbo.InsertarProducto', 'P') IS NOT NULL DROP PROCEDURE dbo.InsertarProducto;
+GO
+CREATE PROCEDURE dbo.InsertarProducto 
+    @codigo VARCHAR(50), 
+    @categoria VARCHAR(50), 
+    @descripcion VARCHAR(100), 
     @precio DECIMAL(10,2)
+AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    INSERT INTO Producto (Prod_Codigo, Prod_Categoria, Prod_Descripcion, Prod_Precio) 
+    VALUES (@codigo, @categoria, @descripcion, @precio); 
+END
+GO
+
+IF OBJECT_ID('dbo.ActualizarProducto', 'P') IS NOT NULL DROP PROCEDURE dbo.ActualizarProducto;
+GO
+CREATE PROCEDURE dbo.ActualizarProducto 
+    @codigo VARCHAR(50), 
+    @categoria VARCHAR(50), 
+    @descripcion VARCHAR(100), 
+    @precio DECIMAL(10,2)
+AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    UPDATE Producto 
+    SET Prod_Categoria = @categoria, Prod_Descripcion = @descripcion, Prod_Precio = @precio 
+    WHERE Prod_Codigo = @codigo; 
+END
+GO
+
+IF OBJECT_ID('dbo.EliminarProducto', 'P') IS NOT NULL DROP PROCEDURE dbo.EliminarProducto;
+GO
+CREATE PROCEDURE dbo.EliminarProducto @codigo VARCHAR(50) AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    DELETE FROM Producto WHERE Prod_Codigo = @codigo; 
+END
+GO
+
+-- PUNTO 4: Listar ventas realizadas por cliente
+IF OBJECT_ID('dbo.listar_ventas_x_cliente_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_ventas_x_cliente_sp;
+GO
+CREATE PROCEDURE dbo.listar_ventas_x_cliente_sp @cli_dni VARCHAR(20) AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT 
+        V.Ven_Nro AS [Nro_Venta], 
+        V.Ven_Fecha AS [Fecha], 
+        C.Cli_DNI AS [DNI], 
+        C.Cli_Apellido AS [Apellido], 
+        C.Cli_Nombre AS [Nombre] 
+    FROM Venta V 
+    INNER JOIN Cliente C ON C.Cli_DNI = V.Cli_DNI 
+    WHERE C.Cli_DNI = @cli_dni 
+    ORDER BY V.Ven_Fecha DESC; 
+END
+GO
+
+-- PUNTO 5: Listar ventas realizadas por rango de fechas
+IF OBJECT_ID('dbo.ListarVentasPorFecha', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarVentasPorFecha;
+GO
+CREATE PROCEDURE dbo.ListarVentasPorFecha
+    @fechaDesde DATETIME,
+    @fechaHasta DATETIME
 AS
 BEGIN
-    UPDATE Producto
-    SET 
-        Prod_Categoria = @categoria,
-        Prod_Descripcion = @descripcion,
-        Prod_Precio = @precio
-    WHERE Prod_Codigo = @codigo;
+    SET NOCOUNT ON;
+    SELECT
+        V.Ven_Nro,
+        V.Ven_Fecha,
+        C.Cli_DNI,
+        C.Cli_Apellido,
+        C.Cli_Nombre
+    FROM Venta V
+    LEFT JOIN Cliente C ON C.Cli_DNI = V.Cli_DNI
+    WHERE V.Ven_Fecha BETWEEN @fechaDesde AND @fechaHasta
+    ORDER BY V.Ven_Fecha DESC;
 END
+GO
 
-
-CREATE PROCEDURE dbo.EliminarProducto
-    @codigo VARCHAR(50)
-AS
-BEGIN
-    DELETE FROM Producto
-    WHERE Prod_Codigo = @codigo;
+-- PUNTO 6: Listar productos vendidos por Cliente
+IF OBJECT_ID('dbo.ListarProductosVendidosXCliente', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarProductosVendidosXCliente;
+GO
+CREATE PROCEDURE dbo.ListarProductosVendidosXCliente @cli_dni VARCHAR(20) AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT 
+        V.Ven_Nro AS [Nro_Venta], 
+        V.Ven_Fecha AS [Fecha], 
+        P.Prod_Codigo AS [Codigo_Producto], 
+        P.Prod_Descripcion AS [Producto], 
+        VD.Det_Cantidad AS [Cantidad], 
+        VD.Det_Precio AS [Precio_Unitario] 
+    FROM Venta V 
+    INNER JOIN VentaDetalle VD ON V.Ven_Nro = VD.Ven_Nro 
+    INNER JOIN Producto P ON VD.Prod_Codigo = P.Prod_Codigo 
+    WHERE V.Cli_DNI = @cli_dni 
+    ORDER BY V.Ven_Fecha DESC; 
 END
+GO
+
+-- PUNTO 7: Listar productos vendidos por rango de fechas
+IF OBJECT_ID('dbo.ListarProductosVendidosXFecha', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarProductosVendidosXFecha;
+GO
+CREATE PROCEDURE dbo.ListarProductosVendidosXFecha @fechaDesde DATETIME, @fechaHasta DATETIME AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT 
+        V.Ven_Nro AS [Nro_Venta], 
+        V.Ven_Fecha AS [Fecha], 
+        C.Cli_Apellido + ', ' + C.Cli_Nombre AS [Cliente], 
+        P.Prod_Descripcion AS [Producto], 
+        VD.Det_Cantidad AS [Cantidad], 
+        VD.Det_Precio AS [Precio_Unitario] 
+    FROM Venta V 
+    INNER JOIN Cliente C ON V.Cli_DNI = C.Cli_DNI 
+    INNER JOIN VentaDetalle VD ON V.Ven_Nro = VD.Ven_Nro 
+    INNER JOIN Producto P ON VD.Prod_Codigo = P.Prod_Codigo 
+    WHERE V.Ven_Fecha BETWEEN @fechaDesde AND @fechaHasta 
+    ORDER BY V.Ven_Fecha DESC; 
+END
+GO
+
+-- Insertar Venta (Cabecera)
+IF OBJECT_ID('dbo.InsertarVenta', 'P') IS NOT NULL DROP PROCEDURE dbo.InsertarVenta;
+GO
+CREATE PROCEDURE dbo.InsertarVenta 
+    @cli_dni VARCHAR(20), 
+    @ven_fecha DATETIME, 
+    @NewVenNro INT OUTPUT
+AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    INSERT INTO Venta (Cli_DNI, Ven_Fecha) VALUES (@cli_dni, @ven_fecha); 
+    SET @NewVenNro = SCOPE_IDENTITY(); 
+END
+GO
+
+-- Insertar Detalle de Venta
+IF OBJECT_ID('dbo.InsertarVentaDetalle', 'P') IS NOT NULL DROP PROCEDURE dbo.InsertarVentaDetalle;
+GO
+CREATE PROCEDURE dbo.InsertarVentaDetalle 
+    @ven_nro INT, 
+    @prod_codigo VARCHAR(50), 
+    @cantidad DECIMAL(18,2), 
+    @precio DECIMAL(18,2)
+AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    INSERT INTO VentaDetalle (Ven_Nro, Prod_Codigo, Det_Cantidad, Det_Precio, Det_Total) 
+    VALUES (@ven_nro, @prod_codigo, @cantidad, @precio, (@cantidad * @precio)); 
+END
+GO
