@@ -84,14 +84,11 @@ namespace ClaseBase
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
-
             cmd.CommandText = "listar_ventas_por_fechas_sp";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
-
             cmd.Parameters.AddWithValue("@fechaDesde", desde);
             cmd.Parameters.AddWithValue("@fechaHasta", hasta);
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -102,13 +99,10 @@ namespace ClaseBase
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
-
             cmd.CommandText = "listar_productos_por_cliente_sp";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
-
             cmd.Parameters.AddWithValue("@cli_dni", dni);
-
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);

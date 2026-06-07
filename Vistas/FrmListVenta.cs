@@ -40,8 +40,10 @@ namespace Vistas
                 string dni = cmbClientes.SelectedValue.ToString();
                 DataTable dtProductos = TrabajarVenta.listar_productos_por_cliente(dni);
                 if (dtProductos.Rows.Count > 0)
+
                 {
                     dgwVenta.DataSource = dtProductos;
+
                 }
                 else
                 {
