@@ -1,4 +1,4 @@
-﻿namespace Vistas
+namespace Vistas
 {
     partial class Principal
     {
@@ -41,6 +41,8 @@
             this.btnListVentas = new System.Windows.Forms.Button();
             this.btnGCliente = new System.Windows.Forms.Button();
             this.btnListProd = new System.Windows.Forms.Button();
+            this.btnListVentasFecha = new System.Windows.Forms.Button();
+            this.btnListProdCliente = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,11 +167,35 @@
             this.btnListProd.UseVisualStyleBackColor = true;
             this.btnListProd.Click += new System.EventHandler(this.btnListProd_Click);
             // 
+            // btnListVentasFecha
+            // 
+            this.btnListVentasFecha.Location = new System.Drawing.Point(278, 80);
+            this.btnListVentasFecha.Margin = new System.Windows.Forms.Padding(2);
+            this.btnListVentasFecha.Name = "btnListVentasFecha";
+            this.btnListVentasFecha.Size = new System.Drawing.Size(141, 25);
+            this.btnListVentasFecha.TabIndex = 10;
+            this.btnListVentasFecha.Text = "Ventas por Fecha";
+            this.btnListVentasFecha.UseVisualStyleBackColor = true;
+            this.btnListVentasFecha.Click += new System.EventHandler(this.btnListVentasFecha_Click);
+            // 
+            // btnListProdCliente
+            // 
+            this.btnListProdCliente.Location = new System.Drawing.Point(278, 140);
+            this.btnListProdCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.btnListProdCliente.Name = "btnListProdCliente";
+            this.btnListProdCliente.Size = new System.Drawing.Size(141, 25);
+            this.btnListProdCliente.TabIndex = 11;
+            this.btnListProdCliente.Text = "Productos por Cliente";
+            this.btnListProdCliente.UseVisualStyleBackColor = true;
+            this.btnListProdCliente.Click += new System.EventHandler(this.btnListProdCliente_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 314);
+            this.Controls.Add(this.btnListVentasFecha);
+            this.Controls.Add(this.btnListProdCliente);
             this.Controls.Add(this.btnListProd);
             this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.lblBienvenida);
@@ -208,6 +234,8 @@
         private System.Windows.Forms.Button btnListVentas;
         private System.Windows.Forms.Button btnGCliente;
         private System.Windows.Forms.Button btnListProd;
+        private System.Windows.Forms.Button btnListVentasFecha;
+        private System.Windows.Forms.Button btnListProdCliente;
 
     }
 }

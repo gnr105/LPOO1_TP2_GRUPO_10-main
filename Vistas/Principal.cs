@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,8 +31,9 @@ namespace Vistas
                 btnGProduct.Enabled = true;
                 btnListProd.Enabled = true;
                 btnGCliente.Enabled = false;
-                btnGCliente.Enabled = false; 
                 btnGVenta.Enabled = false;
+                btnListVentasFecha.Enabled = false;
+                btnListProdCliente.Enabled = false;
             }
             else if (usuarioLogueado.Rol_Codigo == 2)
             {
@@ -42,6 +43,8 @@ namespace Vistas
                 btnGVenta.Enabled = true;
                 btnListProd.Enabled = false;
                 btnListVentas.Enabled = true;
+                btnListVentasFecha.Enabled = true;
+                btnListProdCliente.Enabled = true;
             }
             else if (usuarioLogueado.Rol_Codigo == 3) 
             {
@@ -52,6 +55,8 @@ namespace Vistas
                 btnGOS.Enabled = true;
                 btnListProd.Enabled = true;
                 btnListVentas.Enabled = true;
+                btnListVentasFecha.Enabled = true;
+                btnListProdCliente.Enabled = true;
             }
         }
 
@@ -132,6 +137,18 @@ namespace Vistas
         {
             FrmListaProductos frmListaProductos = new FrmListaProductos();
             frmListaProductos.Show();
+        }
+
+        private void btnListVentasFecha_Click(object sender, EventArgs e)
+        {
+            FrmListVentas frm = new FrmListVentas();
+            frm.Show();
+        }
+
+        private void btnListProdCliente_Click(object sender, EventArgs e)
+        {
+            FrmListProductosCliente frm = new FrmListProductosCliente();
+            frm.Show();
         }
     }
 }

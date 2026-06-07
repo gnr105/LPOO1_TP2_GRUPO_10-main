@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -67,6 +67,18 @@
     <Compile Include="FrmListVenta.Designer.cs">
       <DependentUpon>FrmListVenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmListVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmListVentas.Designer.cs">
+      <DependentUpon>FrmListVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmListProductosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmListProductosCliente.Designer.cs">
+      <DependentUpon>FrmListProductosCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmListVenta.resx">
       <DependentUpon>FrmListVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListVentas.resx">
+      <DependentUpon>FrmListVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListProductosCliente.resx">
+      <DependentUpon>FrmListProductosCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUsuario.resx">
       <DependentUpon>FrmUsuario.cs</DependentUpon>
