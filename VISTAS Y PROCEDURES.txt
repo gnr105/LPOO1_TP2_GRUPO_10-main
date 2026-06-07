@@ -22,6 +22,22 @@ SELECT
 FROM Producto;
 GO
 
+-- Vista usada por P7 (barrionuevo)
+IF OBJECT_ID('dbo.vw_Productos_Vendidos', 'V') IS NOT NULL DROP VIEW dbo.vw_Productos_Vendidos;
+GO
+CREATE VIEW dbo.vw_Productos_Vendidos AS
+SELECT       
+    dbo.Producto.Prod_Codigo, 
+    dbo.Producto.Prod_Categoria, 
+    dbo.Producto.Prod_Descripcion, 
+    dbo.Producto.Prod_Precio, 
+    dbo.VentaDetalle.Ven_Nro, 
+    dbo.Venta.Ven_Fecha
+FROM dbo.Producto 
+INNER JOIN dbo.VentaDetalle ON dbo.Producto.Prod_Codigo = dbo.VentaDetalle.Prod_Codigo
+INNER JOIN dbo.Venta ON dbo.VentaDetalle.Ven_Nro = dbo.Venta.Ven_Nro;
+GO
+
 -- PUNTO 1: Clientes ordenados por apellido
 IF OBJECT_ID('dbo.ListarClientesOrdenados', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarClientesOrdenados;
 GO
@@ -167,6 +183,27 @@ BEGIN
     INNER JOIN Producto P ON VD.Prod_Codigo = P.Prod_Codigo 
     WHERE V.Ven_Fecha BETWEEN @fechaDesde AND @fechaHasta 
     ORDER BY V.Ven_Fecha DESC; 
+END
+GO
+
+-- PUNTO 7 alias: nombre que usa FrmListaProductos de barrionuevo
+IF OBJECT_ID('dbo.ListarProductosPorFecha', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarProductosPorFecha;
+GO
+CREATE PROCEDURE dbo.ListarProductosPorFecha @fechaIni DATETIME, @fechaFin DATETIME AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT * FROM vw_Productos_Vendidos AS VP
+    WHERE VP.Ven_Fecha BETWEEN @fechaIni AND DATEADD(day, 1, @fechaFin); 
+END
+GO
+
+-- Listar todos los productos vendidos (usado por FrmListaProductos al cargar)
+IF OBJECT_ID('dbo.ListarProductos', 'P') IS NOT NULL DROP PROCEDURE dbo.ListarProductos;
+GO
+CREATE PROCEDURE dbo.ListarProductos AS 
+BEGIN 
+    SET NOCOUNT ON; 
+    SELECT * FROM vw_Productos_Vendidos; 
 END
 GO
 

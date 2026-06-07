@@ -29,6 +29,7 @@ namespace Vistas
             {
                 btnGUsuario.Enabled = true;
                 btnGProduct.Enabled = true;
+                btnListProd.Enabled = true;
                 btnGCliente.Enabled = false;
                 btnGCliente.Enabled = false; 
                 btnGVenta.Enabled = false;
@@ -39,6 +40,7 @@ namespace Vistas
                 btnGProduct.Enabled = false;
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
+                btnListProd.Enabled = false;
                 btnListVentas.Enabled = true;
             }
             else if (usuarioLogueado.Rol_Codigo == 3) 
@@ -48,6 +50,7 @@ namespace Vistas
                 btnGCliente.Enabled = true;
                 btnGVenta.Enabled = true;
                 btnGOS.Enabled = true;
+                btnListProd.Enabled = true;
                 btnListVentas.Enabled = true;
             }
         }
@@ -123,6 +126,12 @@ namespace Vistas
         {
             FrmListVenta frmListVentas = new FrmListVenta();
             frmListVentas.Show();
+        }
+
+        private void btnListProd_Click(object sender, EventArgs e)
+        {
+            FrmListaProductos frmListaProductos = new FrmListaProductos();
+            frmListaProductos.Show();
         }
     }
 }
