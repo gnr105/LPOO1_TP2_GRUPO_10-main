@@ -34,13 +34,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbClientes = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnBuscarPorFechas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwVenta)).BeginInit();
             this.SuspendLayout();
             // 
             // dgwVenta
             // 
             this.dgwVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwVenta.Location = new System.Drawing.Point(28, 97);
+            this.dgwVenta.Location = new System.Drawing.Point(28, 187);
             this.dgwVenta.Margin = new System.Windows.Forms.Padding(2);
             this.dgwVenta.Name = "dgwVenta";
             this.dgwVenta.RowTemplate.Height = 24;
@@ -49,7 +54,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(436, 389);
+            this.btnSalir.Location = new System.Drawing.Point(436, 488);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(116, 39);
@@ -97,11 +102,58 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // dtpFechaDesde
+            // 
+            this.dtpFechaDesde.Location = new System.Drawing.Point(91, 101);
+            this.dtpFechaDesde.Name = "dtpFechaDesde";
+            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaDesde.TabIndex = 7;
+            // 
+            // dtpFechaHasta
+            // 
+            this.dtpFechaHasta.Location = new System.Drawing.Point(91, 137);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaHasta.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(38, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Desde";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(38, 143);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Hasta";
+            // 
+            // btnBuscarPorFechas
+            // 
+            this.btnBuscarPorFechas.Location = new System.Drawing.Point(322, 116);
+            this.btnBuscarPorFechas.Name = "btnBuscarPorFechas";
+            this.btnBuscarPorFechas.Size = new System.Drawing.Size(83, 30);
+            this.btnBuscarPorFechas.TabIndex = 11;
+            this.btnBuscarPorFechas.Text = "Buscar Fecha";
+            this.btnBuscarPorFechas.UseVisualStyleBackColor = true;
+            this.btnBuscarPorFechas.Click += new System.EventHandler(this.btnBuscarPorFechas_Click);
+            // 
             // FrmListVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 450);
+            this.ClientSize = new System.Drawing.Size(576, 555);
+            this.Controls.Add(this.btnBuscarPorFechas);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dtpFechaHasta);
+            this.Controls.Add(this.dtpFechaDesde);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.cmbClientes);
             this.Controls.Add(this.label2);
@@ -126,5 +178,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbClientes;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DateTimePicker dtpFechaDesde;
+        private System.Windows.Forms.DateTimePicker dtpFechaHasta;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnBuscarPorFechas;
     }
 }

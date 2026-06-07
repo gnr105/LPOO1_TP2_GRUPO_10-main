@@ -80,54 +80,94 @@ namespace ClaseBase
 
             return dt;
         }
+        public static DataTable listar_ventas_por_fechas(DateTime desde, DateTime hasta)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "listar_ventas_por_fechas_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@fechaDesde", desde);
+            cmd.Parameters.AddWithValue("@fechaHasta", hasta);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            return dt;
+        }
+        public static DataTable listar_productos_por_cliente(string dni)
+        {
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "listar_productos_por_cliente_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@cli_dni", dni);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            return dt;
+        }
 
         public static void insert_venta(DateTime fecha, string dni, DataTable dtDetalles)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
-
             cnn.Open();
-
             SqlTransaction tran = cnn.BeginTransaction();
 
-
-            SqlCommand cmdVenta = new SqlCommand();
-            cmdVenta.CommandText = "INSERT INTO VENTA(Ven_Fecha, Cli_DNI) ";
-            cmdVenta.CommandText += "VALUES(@fec, @dni); ";
-            cmdVenta.CommandText += "SELECT SCOPE_IDENTITY();";
-
-            cmdVenta.CommandType = CommandType.Text;
-            cmdVenta.Connection = cnn;
-            cmdVenta.Transaction = tran;
-
-            cmdVenta.Parameters.AddWithValue("@fec", fecha);
-            cmdVenta.Parameters.AddWithValue("@dni", dni);
-
-
-            int nroVenta = Convert.ToInt32(cmdVenta.ExecuteScalar());
-
-     
-            foreach (DataRow fila in dtDetalles.Rows)
+            try
             {
-                SqlCommand cmdDet = new SqlCommand();
-                cmdDet.CommandText = "INSERT INTO VENTADETALLE(Ven_Nro, Prod_Codigo, Det_Precio, Det_Cantidad, Det_Total) ";
-                cmdDet.CommandText += "VALUES(@nro, @prod, @pre, @cant, @tot)";
+                // 1. Insertar Cabecera de Venta
+                SqlCommand cmdVenta = new SqlCommand();
+                cmdVenta.CommandText = "insert_venta_sp"; // Nombre del SP
+                cmdVenta.CommandType = CommandType.StoredProcedure;
+                cmdVenta.Connection = cnn;
+                cmdVenta.Transaction = tran;
 
-                cmdDet.CommandType = CommandType.Text;
-                cmdDet.Connection = cnn;
-                cmdDet.Transaction = tran;
+                cmdVenta.Parameters.AddWithValue("@fec", fecha);
+                cmdVenta.Parameters.AddWithValue("@dni", dni);
 
-                cmdDet.Parameters.AddWithValue("@nro", nroVenta);
-                cmdDet.Parameters.AddWithValue("@prod", fila["Codigo"]);
-                cmdDet.Parameters.AddWithValue("@pre", fila["Precio"]);
-                cmdDet.Parameters.AddWithValue("@cant", fila["Cantidad"]);
-                cmdDet.Parameters.AddWithValue("@tot", fila["Total"]);
+                // Capturamos el Ven_Nro generado por el SCOPE_IDENTITY() del SP
+                int nroVenta = Convert.ToInt32(cmdVenta.ExecuteScalar());
 
-                cmdDet.ExecuteNonQuery();
+                // 2. Insertar cada renglón del Detalle
+                foreach (DataRow fila in dtDetalles.Rows)
+                {
+                    SqlCommand cmdDet = new SqlCommand();
+                    cmdDet.CommandText = "insert_detalle_venta_sp"; // Nombre del SP del detalle
+                    cmdDet.CommandType = CommandType.StoredProcedure;
+                    cmdDet.Connection = cnn;
+                    cmdDet.Transaction = tran;
+
+                    cmdDet.Parameters.AddWithValue("@nro", nroVenta);
+                    cmdDet.Parameters.AddWithValue("@prod", fila["Codigo"]);
+                    cmdDet.Parameters.AddWithValue("@pre", fila["Precio"]);
+                    cmdDet.Parameters.AddWithValue("@cant", fila["Cantidad"]);
+                    cmdDet.Parameters.AddWithValue("@tot", fila["Total"]);
+
+                    cmdDet.ExecuteNonQuery();
+                }
+
+                // Si todo anduvo joya, confirmamos la transacción
+                tran.Commit();
             }
-
-            tran.Commit();
-
-            cnn.Close();
+            catch (Exception ex)
+            {
+                // Si algo falló en el camino, deshacemos todo para no dejar datos corruptos
+                tran.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                cnn.Close();
+            }
         }
     }
 }

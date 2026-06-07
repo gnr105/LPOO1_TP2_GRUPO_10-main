@@ -38,11 +38,20 @@ namespace Vistas
             if (cmbClientes.SelectedValue != null)
             {
                 string dni = cmbClientes.SelectedValue.ToString();
-                dgwVenta.DataSource = TrabajarVenta.listar_ventas_x_cliente(dni);
+                DataTable dtProductos = TrabajarVenta.listar_productos_por_cliente(dni);
+                if (dtProductos.Rows.Count > 0)
+                {
+                    dgwVenta.DataSource = dtProductos;
+                }
+                else
+                {
+                    MessageBox.Show("El cliente seleccionado no registra compras de productos.", "Información");
+                    dgwVenta.DataSource = null;
+                }
             }
             else
             {
-                MessageBox.Show("Seleccione un cliente.");
+                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "Atención");
             }
         }
 
@@ -74,6 +83,31 @@ namespace Vistas
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBuscarPorFechas_Click(object sender, EventArgs e)
+        {
+            DateTime fechaDesde = dtpFechaDesde.Value;
+            DateTime fechaHasta = dtpFechaHasta.Value;
+            if (fechaDesde <= fechaHasta)
+            {
+                
+                DataTable dtVentasFechas = TrabajarVenta.listar_ventas_por_fechas(fechaDesde, fechaHasta);
+
+                if (dtVentasFechas.Rows.Count > 0)
+                {
+                    dgwVenta.DataSource = dtVentasFechas;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron ventas registradas en ese rango de fechas.", "Información");
+                    dgwVenta.DataSource = null; 
+                }
+            }
+            else
+            {
+                MessageBox.Show("La fecha de inicio ('Desde') no puede ser mayor que la fecha de fin ('Hasta').", "Atención");
+            }
         }
         
        
