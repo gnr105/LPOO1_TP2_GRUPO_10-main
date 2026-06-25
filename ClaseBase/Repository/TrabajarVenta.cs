@@ -118,9 +118,9 @@ namespace ClaseBase
 
             try
             {
-                // 1. Insertar Cabecera de Venta
+                // cabecera de venta
                 SqlCommand cmdVenta = new SqlCommand();
-                cmdVenta.CommandText = "insert_venta_sp"; // Nombre del SP
+                cmdVenta.CommandText = "insert_venta_sp";
                 cmdVenta.CommandType = CommandType.StoredProcedure;
                 cmdVenta.Connection = cnn;
                 cmdVenta.Transaction = tran;
@@ -128,14 +128,12 @@ namespace ClaseBase
                 cmdVenta.Parameters.AddWithValue("@fec", fecha);
                 cmdVenta.Parameters.AddWithValue("@dni", dni);
 
-                // Capturamos el Ven_Nro generado por el SCOPE_IDENTITY() del SP
                 int nroVenta = Convert.ToInt32(cmdVenta.ExecuteScalar());
 
-                // 2. Insertar cada renglón del Detalle
                 foreach (DataRow fila in dtDetalles.Rows)
                 {
                     SqlCommand cmdDet = new SqlCommand();
-                    cmdDet.CommandText = "insert_detalle_venta_sp"; // Nombre del SP del detalle
+                    cmdDet.CommandText = "insert_detalle_venta_sp";
                     cmdDet.CommandType = CommandType.StoredProcedure;
                     cmdDet.Connection = cnn;
                     cmdDet.Transaction = tran;
@@ -149,12 +147,11 @@ namespace ClaseBase
                     cmdDet.ExecuteNonQuery();
                 }
 
-                // Si todo anduvo joya, confirmamos la transacción
                 tran.Commit();
             }
             catch (Exception ex)
             {
-                // Si algo falló en el camino, deshacemos todo para no dejar datos corruptos
+               //deshacemos todo para no dejar datos corruptos
                 tran.Rollback();
                 throw ex;
             }

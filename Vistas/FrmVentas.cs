@@ -20,18 +20,10 @@ namespace Vistas
         }
         private void FrmVentas_Load_1(object sender, EventArgs e)
         {
-            load_combo_clientes();
             load_combo_productos();
             configurar_grilla();
         }
        
-
-        private void load_combo_clientes()
-        {
-            cmbClientes.DisplayMember = "NombreCompleto";
-            cmbClientes.ValueMember = "Cli_DNI";
-            cmbClientes.DataSource = TrabajarVenta.list_clientes();
-        }
 
         private void load_combo_productos()
         {
@@ -64,22 +56,29 @@ namespace Vistas
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            // Validamos que hayan buscado un cliente primero
+            if (string.IsNullOrWhiteSpace(txtDniCliente.Text))
+            {
+                MessageBox.Show("Por favor, busque y seleccione un cliente.");
+                return;
+            }
+
             if (dgvDetalle.Rows.Count > 0)
             {
                 DateTime fecha = dtpFecha.Value;
-                string dni = cmbClientes.SelectedValue.ToString();
 
-                // 1. Creamos un DataTable con la misma estructura que necesita la BD
+                // Ahora leemos el DNI desde el TextBox en lugar del ComboBox
+                string dni = txtDniCliente.Text;
+
                 DataTable dtDetalles = new DataTable();
                 dtDetalles.Columns.Add("Codigo", typeof(string));
                 dtDetalles.Columns.Add("Precio", typeof(decimal));
                 dtDetalles.Columns.Add("Cantidad", typeof(decimal));
                 dtDetalles.Columns.Add("Total", typeof(decimal));
 
-                // 2. Recorremos la grilla visual y copiamos los datos al DataTable
                 foreach (DataGridViewRow row in dgvDetalle.Rows)
                 {
-                    if (!row.IsNewRow) // Ignoramos la fila vacía del final
+                    if (!row.IsNewRow)
                     {
                         dtDetalles.Rows.Add(
                             row.Cells["Codigo"].Value,
@@ -90,7 +89,6 @@ namespace Vistas
                     }
                 }
 
-                // 3. Llamamos al método de ClaseBase pasándole el DataTable puro
                 TrabajarVenta.insert_venta(fecha, dni, dtDetalles);
 
                 MessageBox.Show("Venta registrada con éxito");
@@ -102,17 +100,6 @@ namespace Vistas
             }
         }
         
-        private void btnBuscarVentas_Click(object sender, EventArgs e)
-        {
-            if (cmbClientes.SelectedValue != null)
-            {
-                string dni = cmbClientes.SelectedValue.ToString();
-                dgvDetalle.DataSource = TrabajarVenta.listar_ventas_x_cliente(dni);            }
-            else
-            {
-                MessageBox.Show("Seleccione un cliente.");
-            }
-        }
 
         private void configurar_grilla()
         {
@@ -130,8 +117,23 @@ namespace Vistas
             txtPrecio.Text = "";
             dtpFecha.Value = DateTime.Now;
 
-            if (cmbClientes.Items.Count > 0) cmbClientes.SelectedIndex = 0;
+            // Limpiamos los datos del cliente
+            txtDniCliente.Text = "";
+            txtNombreCliente.Text = "";
+
             if (cmbProductos.Items.Count > 0) cmbProductos.SelectedIndex = 0;
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            FrmBuscarClientes buscarClientes = new FrmBuscarClientes();
+
+            if (buscarClientes.ShowDialog() == DialogResult.OK)
+            {
+                txtDniCliente.Text = buscarClientes.DniSeleccionado;
+
+                txtNombreCliente.Text = buscarClientes.ClienteSeleccionado;
+            }
         }
         
     }
