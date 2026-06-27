@@ -13,10 +13,8 @@ namespace ClaseBase
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO ObraSocial(OS_CUIT, OS_RazonSocial, OS_Direccion, OS_Telefono) " +
-                              "VALUES(@cuit, @razon, @dir, @tel)";
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insertar_obrasocial_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
 
             cmd.Parameters.AddWithValue("@cuit", os.OS_CUIT);
@@ -29,12 +27,10 @@ namespace ClaseBase
             cnn.Close();
         }
 
-        // Devuelve todas las obras sociales usando stored procedure
         public static DataTable list_obrasociales()
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
-
             cmd.CommandText = "listar_obrasociales_sp";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
@@ -45,12 +41,10 @@ namespace ClaseBase
             return dt;
         }
 
-        // Devuelve los clientes afiliados usando stored procedure
         public static DataTable list_clientes_por_obrasocial(string cuit)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
-
             cmd.CommandText = "listar_clientes_por_obrasocial_sp";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
