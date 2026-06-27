@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +19,7 @@ namespace Vistas
 
         private void FrmVenta_Load(object sender, EventArgs e)
         {
+            dgwVenta.AllowUserToAddRows = false;
             load_combo_clientes();
 
             load_ventas();
@@ -57,14 +58,14 @@ namespace Vistas
                 }
                 else
                 {
-                    MessageBox.Show("El cliente seleccionado no registra ventas.", "InformaciÃ³n");
+                    MessageBox.Show("El cliente seleccionado no registra ventas.", "Información");
                     dgwVenta.DataSource = null;
                 }
                 ActualizarContadorVentas();
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "AtenciÃ³n");
+                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "Atención");
             }
         }
 
@@ -109,14 +110,14 @@ namespace Vistas
                 }
                 else
                 {
-                    MessageBox.Show("No se encontraron ventas registradas en ese rango de fechas.", "InformaciÃ³n");
+                    MessageBox.Show("No se encontraron ventas registradas en ese rango de fechas.", "Información");
                     dgwVenta.DataSource = null; 
                 }
                 ActualizarContadorVentas();
             }
             else
             {
-                MessageBox.Show("La fecha de inicio ('Desde') no puede ser mayor que la fecha de fin ('Hasta').", "AtenciÃ³n");
+                MessageBox.Show("La fecha de inicio ('Desde') no puede ser mayor que la fecha de fin ('Hasta').", "Atención");
             }
         }
 
@@ -125,7 +126,7 @@ namespace Vistas
         {
             if (dgwVenta.CurrentRow == null || dgwVenta.DataSource == null)
             {
-                MessageBox.Show("Por favor, seleccione una venta de la grilla para eliminar.", "AtenciÃ³n");
+                MessageBox.Show("Por favor, seleccione una venta de la grilla para eliminar.", "Atención");
                 return;
             }
 
@@ -136,21 +137,21 @@ namespace Vistas
                 valorNro = dgwVenta.CurrentRow.Cells["Ven_Nro"].Value;
             else
             {
-                MessageBox.Show("No se encontrÃ³ la columna de nÃºmero de venta en la grilla.", "AtenciÃ³n");
+                MessageBox.Show("No se encontró la columna de número de venta en la grilla.", "Atención");
                 return;
             }
 
             if (valorNro == null || valorNro == DBNull.Value)
             {
-                MessageBox.Show("No se pudo determinar el nÃºmero de venta seleccionado.", "AtenciÃ³n");
+                MessageBox.Show("No se pudo determinar el número de venta seleccionado.", "Atención");
                 return;
             }
 
             int nroVenta = Convert.ToInt32(valorNro);
 
             DialogResult result = MessageBox.Show(
-                "Â¿EstÃ¡ seguro que desea eliminar la venta NÂ° " + nroVenta + "?",
-                "Confirmar eliminaciÃ³n",
+                "¿Está seguro que desea eliminar la venta N° " + nroVenta + "?",
+                "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
@@ -159,12 +160,12 @@ namespace Vistas
                 try
                 {
                     TrabajarVenta.delete_venta(nroVenta);
-                    MessageBox.Show("La venta fue eliminada correctamente.", "InformaciÃ³n", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La venta fue eliminada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     load_ventas();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("OcurriÃ³ un error al eliminar la venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ocurrió un error al eliminar la venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

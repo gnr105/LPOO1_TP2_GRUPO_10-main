@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +19,7 @@ namespace Vistas
 
         private void FrmClientesPorObraSocial_Load(object sender, EventArgs e)
         {
+            dgvClientes.AllowUserToAddRows = false;
             load_combo_obrasocial();
         }
 
@@ -35,7 +36,7 @@ namespace Vistas
         {
             if (cmbObraSocial.SelectedValue == null)
             {
-                MessageBox.Show("Por favor, seleccione una obra social de la lista.", "AtenciÃ³n");
+                MessageBox.Show("Por favor, seleccione una obra social de la lista.", "Atención");
                 return;
             }
 
@@ -48,7 +49,7 @@ namespace Vistas
             }
             else
             {
-                MessageBox.Show("No hay clientes afiliados a la obra social seleccionada.", "InformaciÃ³n");
+                MessageBox.Show("No hay clientes afiliados a la obra social seleccionada.", "Información");
                 dgvClientes.DataSource = null;
             }
 

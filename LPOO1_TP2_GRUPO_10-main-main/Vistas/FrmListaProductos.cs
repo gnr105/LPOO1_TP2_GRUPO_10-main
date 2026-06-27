@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +19,7 @@ namespace Vistas
 
         private void FrmListaProductos_Load(object sender, EventArgs e)
         {
+            dgwProductos.AllowUserToAddRows = false;
             load_combo_clientes();
             load_productos();
         }
@@ -65,14 +66,14 @@ namespace Vistas
                 }
                 else
                 {
-                    MessageBox.Show("El cliente seleccionado no registra compras de productos.", "InformaciÃ³n");
+                    MessageBox.Show("El cliente seleccionado no registra compras de productos.", "Información");
                     dgwProductos.DataSource = null;
                 }
                 ActualizarContadorProductos();
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "AtenciÃ³n");
+                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "Atención");
             }
         }
 
