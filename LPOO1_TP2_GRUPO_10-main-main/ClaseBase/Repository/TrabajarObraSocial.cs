@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,17 +29,14 @@ namespace ClaseBase
             cnn.Close();
         }
 
-        // Devuelve todas las obras sociales, pensado para cargar el ComboBox
+        // Devuelve todas las obras sociales usando stored procedure
         public static DataTable list_obrasociales()
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "SELECT OS_CUIT as 'CUIT', OS_RazonSocial as 'RazonSocial', " +
-                              "OS_Direccion as 'Direccion', OS_Telefono as 'Telefono' " +
-                              "FROM ObraSocial ORDER BY OS_RazonSocial";
-
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "listar_obrasociales_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -48,19 +45,14 @@ namespace ClaseBase
             return dt;
         }
 
-        // Devuelve los clientes afiliados a la obra social indicada por CUIT
+        // Devuelve los clientes afiliados usando stored procedure
         public static DataTable list_clientes_por_obrasocial(string cuit)
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "SELECT Cli_DNI as 'DNI', Cli_Apellido as 'Apellido', " +
-                              "Cli_Nombre as 'Nombre', Cli_Direccion as 'Direccion', " +
-                              "Cli_NroCarnet as 'NroCarnet' " +
-                              "FROM Cliente WHERE OS_CUIT = @cuit " +
-                              "ORDER BY Cli_Apellido";
-
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "listar_clientes_por_obrasocial_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = cnn;
             cmd.Parameters.AddWithValue("@cuit", cuit);
 

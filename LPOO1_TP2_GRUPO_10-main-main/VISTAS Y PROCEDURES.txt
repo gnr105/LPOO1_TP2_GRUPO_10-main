@@ -237,3 +237,41 @@ BEGIN
         ORDER BY Apellido ASC;
 END
 GO
+
+
+-- REQUERIMIENTO 8: Listar Clientes por Obra Social
+IF OBJECT_ID('dbo.listar_clientes_por_obrasocial_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_clientes_por_obrasocial_sp;
+GO
+CREATE PROCEDURE dbo.listar_clientes_por_obrasocial_sp
+    @cuit VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Cli_DNI AS [DNI], 
+        Cli_Apellido AS [Apellido], 
+        Cli_Nombre AS [Nombre], 
+        Cli_Direccion AS [Direccion], 
+        Cli_NroCarnet AS [NroCarnet]
+    FROM Cliente
+    WHERE OS_CUIT = @cuit
+    ORDER BY Cli_Apellido ASC;
+END
+GO
+
+-- Listar todas las Obras Sociales (para combo)
+IF OBJECT_ID('dbo.listar_obrasociales_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_obrasociales_sp;
+GO
+CREATE PROCEDURE dbo.listar_obrasociales_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        OS_CUIT AS [CUIT], 
+        OS_RazonSocial AS [RazonSocial], 
+        OS_Direccion AS [Direccion], 
+        OS_Telefono AS [Telefono]
+    FROM ObraSocial
+    ORDER BY OS_RazonSocial ASC;
+END
+GO
