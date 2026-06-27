@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +19,7 @@ namespace Vistas
 
         private void FrmListaProductos_Load(object sender, EventArgs e)
         {
+            dgwProductos.AllowUserToAddRows = false;
             load_combo_clientes();
             load_productos();
         }
@@ -33,6 +34,14 @@ namespace Vistas
         private void load_productos()
         {
             dgwProductos.DataSource = TrabajarProducto.listarProd();
+            ActualizarContadorProductos();
+        }
+
+        // Puntos 6 y 7: actualiza el label al pie de la grilla con la cantidad de productos vendidos
+        private void ActualizarContadorProductos()
+        {
+            int cantidad = (dgwProductos.DataSource != null) ? dgwProductos.Rows.Count : 0;
+            lblCantidadProductos.Text = "Cantidad de productos: " + cantidad;
         }
 
         private void btnBuscarFecha_Click(object sender, EventArgs e)
@@ -41,6 +50,7 @@ namespace Vistas
             DateTime ff = dtpFechaFinal.Value.Date;
 
             dgwProductos.DataSource = TrabajarProducto.listar_prod_por_fecha(fi, ff);
+            ActualizarContadorProductos();
         }
 
         private void btnBuscarPorCliente_Click(object sender, EventArgs e)
@@ -56,13 +66,14 @@ namespace Vistas
                 }
                 else
                 {
-                    MessageBox.Show("El cliente seleccionado no registra compras de productos.", "InformaciÃ³n");
+                    MessageBox.Show("El cliente seleccionado no registra compras de productos.", "Información");
                     dgwProductos.DataSource = null;
                 }
+                ActualizarContadorProductos();
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "AtenciÃ³n");
+                MessageBox.Show("Por favor, seleccione un cliente de la lista.", "Atención");
             }
         }
 

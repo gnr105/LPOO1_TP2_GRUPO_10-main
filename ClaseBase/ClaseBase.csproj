@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Enttity\Rol.cs" />
     <Compile Include="Repository\TrabajarCliente.cs" />
+    <Compile Include="Repository\TrabajarObraSocial.cs" />
     <Compile Include="Repository\TrabajarUsuario.cs" />
     <Compile Include="Enttity\Usuario.cs" />
     <Compile Include="Repository\UsuarioService.cs" />

@@ -40,6 +40,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscarPorFechas = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnEliminarVenta = new System.Windows.Forms.Button();
+            this.lblCantidadVentas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgwVenta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,11 +155,36 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Buscar por Fecha";
             // 
+            // btnEliminarVenta
+            // 
+            this.btnEliminarVenta.BackColor = System.Drawing.Color.IndianRed;
+            this.btnEliminarVenta.ForeColor = System.Drawing.Color.White;
+            this.btnEliminarVenta.Location = new System.Drawing.Point(28, 551);
+            this.btnEliminarVenta.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarVenta.Name = "btnEliminarVenta";
+            this.btnEliminarVenta.Size = new System.Drawing.Size(150, 39);
+            this.btnEliminarVenta.TabIndex = 13;
+            this.btnEliminarVenta.Text = "Eliminar Venta";
+            this.btnEliminarVenta.UseVisualStyleBackColor = false;
+            this.btnEliminarVenta.Click += new System.EventHandler(this.btnEliminarVenta_Click);
+            // 
+            // lblCantidadVentas
+            // 
+            this.lblCantidadVentas.AutoSize = true;
+            this.lblCantidadVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidadVentas.Location = new System.Drawing.Point(28, 537);
+            this.lblCantidadVentas.Name = "lblCantidadVentas";
+            this.lblCantidadVentas.Size = new System.Drawing.Size(160, 16);
+            this.lblCantidadVentas.TabIndex = 14;
+            this.lblCantidadVentas.Text = "Cantidad de ventas: 0";
+            // 
             // FrmListVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 601);
+            this.Controls.Add(this.lblCantidadVentas);
+            this.Controls.Add(this.btnEliminarVenta);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnBuscarPorFechas);
             this.Controls.Add(this.label4);
@@ -194,5 +221,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnBuscarPorFechas;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnEliminarVenta;
+        private System.Windows.Forms.Label lblCantidadVentas;
     }
 }

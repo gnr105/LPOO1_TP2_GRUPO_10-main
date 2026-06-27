@@ -41,6 +41,7 @@
             this.btnListVentas = new System.Windows.Forms.Button();
             this.btnGCliente = new System.Windows.Forms.Button();
             this.btnListProd = new System.Windows.Forms.Button();
+            this.btnListClientesOS = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,11 +166,22 @@
             this.btnListProd.UseVisualStyleBackColor = true;
             this.btnListProd.Click += new System.EventHandler(this.btnListProd_Click);
             // 
+            // btnListClientesOS
+            // 
+            this.btnListClientesOS.Location = new System.Drawing.Point(287, 141);
+            this.btnListClientesOS.Name = "btnListClientesOS";
+            this.btnListClientesOS.Size = new System.Drawing.Size(125, 23);
+            this.btnListClientesOS.TabIndex = 10;
+            this.btnListClientesOS.Text = "Clientes x Obra Social";
+            this.btnListClientesOS.UseVisualStyleBackColor = true;
+            this.btnListClientesOS.Click += new System.EventHandler(this.btnListClientesOS_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 314);
+            this.Controls.Add(this.btnListClientesOS);
             this.Controls.Add(this.btnListProd);
             this.Controls.Add(this.btnGCliente);
             this.Controls.Add(this.lblBienvenida);
@@ -208,6 +220,7 @@
         private System.Windows.Forms.Button btnListVentas;
         private System.Windows.Forms.Button btnGCliente;
         private System.Windows.Forms.Button btnListProd;
+        private System.Windows.Forms.Button btnListClientesOS;
 
     }
 }

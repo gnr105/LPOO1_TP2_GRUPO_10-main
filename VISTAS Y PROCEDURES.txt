@@ -276,6 +276,8 @@ BEGIN
 END
 GO
 
+
+
 -- ==========================================
 -- PROCEDIMIENTOS ALMACENADOS DE MIGRACIÓN COMPLETA
 -- ==========================================

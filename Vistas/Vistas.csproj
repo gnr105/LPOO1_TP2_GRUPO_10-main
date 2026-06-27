@@ -55,6 +55,12 @@
     <Compile Include="FrmBuscarClientes.Designer.cs">
       <DependentUpon>FrmBuscarClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmClientesPorObraSocial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClientesPorObraSocial.Designer.cs">
+      <DependentUpon>FrmClientesPorObraSocial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </Compile>
     <EmbeddedResource Include="FrmBuscarClientes.resx">
       <DependentUpon>FrmBuscarClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClientesPorObraSocial.resx">
+      <DependentUpon>FrmClientesPorObraSocial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>

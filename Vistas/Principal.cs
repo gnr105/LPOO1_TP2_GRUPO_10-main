@@ -133,5 +133,11 @@ namespace Vistas
             FrmListaProductos frmListaProductos = new FrmListaProductos();
             frmListaProductos.Show();
         }
+
+        private void btnListClientesOS_Click(object sender, EventArgs e)
+        {
+            FrmClientesPorObraSocial frmClientesOS = new FrmClientesPorObraSocial();
+            frmClientesOS.Show();
+        }
     }
 }

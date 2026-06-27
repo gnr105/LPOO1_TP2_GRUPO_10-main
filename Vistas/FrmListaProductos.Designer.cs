@@ -39,6 +39,7 @@
             this.cmbClientes = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblCantidadProductos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgwProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,11 +141,22 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Hasta:";
             // 
+            // lblCantidadProductos
+            // 
+            this.lblCantidadProductos.AutoSize = true;
+            this.lblCantidadProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidadProductos.Location = new System.Drawing.Point(12, 420);
+            this.lblCantidadProductos.Name = "lblCantidadProductos";
+            this.lblCantidadProductos.Size = new System.Drawing.Size(190, 16);
+            this.lblCantidadProductos.TabIndex = 12;
+            this.lblCantidadProductos.Text = "Cantidad de productos: 0";
+            // 
             // FrmListaProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 472);
+            this.Controls.Add(this.lblCantidadProductos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbClientes);
@@ -178,6 +190,7 @@
         private System.Windows.Forms.ComboBox cmbClientes;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCantidadProductos;
 
     }
 }
