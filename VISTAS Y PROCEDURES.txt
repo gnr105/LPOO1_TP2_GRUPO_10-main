@@ -275,3 +275,292 @@ BEGIN
     ORDER BY OS_RazonSocial ASC;
 END
 GO
+
+-- ==========================================
+-- PROCEDIMIENTOS ALMACENADOS DE MIGRACIÓN COMPLETA
+-- ==========================================
+
+-- CLIENTE: Insertar
+IF OBJECT_ID('dbo.insertar_cliente_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.insertar_cliente_sp;
+GO
+CREATE PROCEDURE dbo.insertar_cliente_sp
+    @dni VARCHAR(20),
+    @ape VARCHAR(50),
+    @nom VARCHAR(50),
+    @dir VARCHAR(100),
+    @os VARCHAR(20),
+    @ncar VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO Cliente(Cli_DNI, Cli_Apellido, Cli_Nombre, Cli_Direccion, OS_CUIT, Cli_NroCarnet)
+    VALUES (@dni, @ape, @nom, @dir, @os, @ncar);
+END
+GO
+
+-- CLIENTE: Listar
+IF OBJECT_ID('dbo.listar_clientes_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_clientes_sp;
+GO
+CREATE PROCEDURE dbo.listar_clientes_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Cli_DNI AS [DNI], 
+        Cli_Apellido AS [Apellido], 
+        Cli_Nombre AS [Nombre], 
+        Cli_Direccion AS [Direccion], 
+        OS_CUIT AS [Obrasocial], 
+        Cli_NroCarnet AS [NroCarnet]
+    FROM Cliente;
+END
+GO
+
+-- CLIENTE: Buscar por patrón
+IF OBJECT_ID('dbo.buscar_clientes_por_patron_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.buscar_clientes_por_patron_sp;
+GO
+CREATE PROCEDURE dbo.buscar_clientes_por_patron_sp
+    @pat VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Cli_DNI AS [DNI], 
+        Cli_Apellido AS [Apellido], 
+        Cli_Nombre AS [Nombre], 
+        Cli_Direccion AS [Direccion], 
+        OS_CUIT AS [Obrasocial], 
+        Cli_NroCarnet AS [NroCarnet]
+    FROM Cliente
+    WHERE Cli_DNI LIKE @pat + '%' OR Cli_Apellido LIKE @pat + '%';
+END
+GO
+
+-- CLIENTE: Actualizar
+IF OBJECT_ID('dbo.actualizar_cliente_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.actualizar_cliente_sp;
+GO
+CREATE PROCEDURE dbo.actualizar_cliente_sp
+    @dni VARCHAR(20),
+    @ape VARCHAR(50),
+    @nom VARCHAR(50),
+    @dir VARCHAR(100),
+    @os VARCHAR(20),
+    @ncar VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE Cliente 
+    SET Cli_Apellido = @ape, Cli_Nombre = @nom, Cli_Direccion = @dir, OS_CUIT = @os, Cli_NroCarnet = @ncar
+    WHERE Cli_DNI = @dni;
+END
+GO
+
+-- CLIENTE: Eliminar
+IF OBJECT_ID('dbo.eliminar_cliente_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.eliminar_cliente_sp;
+GO
+CREATE PROCEDURE dbo.eliminar_cliente_sp
+    @dni VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DELETE FROM Cliente WHERE Cli_DNI = @dni;
+END
+GO
+
+-- OBRA SOCIAL: Insertar
+IF OBJECT_ID('dbo.insertar_obrasocial_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.insertar_obrasocial_sp;
+GO
+CREATE PROCEDURE dbo.insertar_obrasocial_sp
+    @cuit VARCHAR(20),
+    @razon VARCHAR(100),
+    @dir VARCHAR(100),
+    @tel VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO ObraSocial(OS_CUIT, OS_RazonSocial, OS_Direccion, OS_Telefono)
+    VALUES (@cuit, @razon, @dir, @tel);
+END
+GO
+
+-- ROLES: Listar
+IF OBJECT_ID('dbo.listar_roles_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_roles_sp;
+GO
+CREATE PROCEDURE dbo.listar_roles_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * FROM roles;
+END
+GO
+
+-- USUARIO: Insertar
+IF OBJECT_ID('dbo.insertar_usuario_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.insertar_usuario_sp;
+GO
+CREATE PROCEDURE dbo.insertar_usuario_sp
+    @user VARCHAR(50),
+    @pss VARCHAR(50),
+    @ape VARCHAR(100),
+    @rol INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO Usuario(Usu_NombreUsuario, Usu_Contraseña, Usu_ApellidoNombre, Rol_Codigo)
+    VALUES (@user, @pss, @ape, @rol);
+END
+GO
+
+-- USUARIO: Listar
+IF OBJECT_ID('dbo.listar_usuarios_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_usuarios_sp;
+GO
+CREATE PROCEDURE dbo.listar_usuarios_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Usu_NombreUsuario AS [Usuario], 
+        Usu_Contraseña AS [Contraseña], 
+        Usu_ApellidoNombre AS [ApellidoNombre], 
+        Rol_Descripcion AS [Rol], 
+        Usu_ID, 
+        U.Rol_Codigo 
+    FROM Usuario AS U 
+    LEFT JOIN Roles AS R ON (R.Rol_Codigo = U.Rol_Codigo);
+END
+GO
+
+-- USUARIO: Buscar por patrón
+IF OBJECT_ID('dbo.buscar_usuarios_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.buscar_usuarios_sp;
+GO
+CREATE PROCEDURE dbo.buscar_usuarios_sp
+    @pattern VARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Usu_NombreUsuario AS [Usuario], 
+        Usu_Contraseña AS [Contraseña], 
+        Usu_ApellidoNombre AS [ApellidoNombre], 
+        Rol_Descripcion AS [Rol], 
+        Usu_ID, 
+        U.Rol_Codigo 
+    FROM Usuario AS U 
+    LEFT JOIN Roles AS R ON (R.Rol_Codigo = U.Rol_Codigo)
+    WHERE Usu_ApellidoNombre LIKE '%' + @pattern + '%';
+END
+GO
+
+-- USUARIO: Actualizar
+IF OBJECT_ID('dbo.actualizar_usuario_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.actualizar_usuario_sp;
+GO
+CREATE PROCEDURE dbo.actualizar_usuario_sp
+    @id INT,
+    @user VARCHAR(50),
+    @pss VARCHAR(50),
+    @ape VARCHAR(100),
+    @rol INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE Usuario 
+    SET Usu_NombreUsuario = @user, Usu_Contraseña = @pss, Usu_ApellidoNombre = @ape, Rol_Codigo = @rol 
+    WHERE Usu_ID = @id;
+END
+GO
+
+-- USUARIO: Eliminar
+IF OBJECT_ID('dbo.eliminar_usuario_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.eliminar_usuario_sp;
+GO
+CREATE PROCEDURE dbo.eliminar_usuario_sp
+    @id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DELETE FROM Usuario WHERE Usu_ID = @id;
+END
+GO
+
+-- USUARIO: Validar Login
+IF OBJECT_ID('dbo.validar_login_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.validar_login_sp;
+GO
+CREATE PROCEDURE dbo.validar_login_sp
+    @user VARCHAR(50),
+    @pass VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * FROM Usuario WHERE Usu_NombreUsuario = @user AND Usu_Contraseña = @pass;
+END
+GO
+
+-- VENTA: Listar
+IF OBJECT_ID('dbo.listar_ventas_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_ventas_sp;
+GO
+CREATE PROCEDURE dbo.listar_ventas_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        V.Ven_Nro AS [Nro_Venta], 
+        V.Ven_Fecha AS [Fecha], 
+        V.Cli_DNI AS [DNI], 
+        C.Cli_Apellido AS [Apellido], 
+        C.Cli_Nombre AS [Nombre] 
+    FROM Venta AS V 
+    LEFT JOIN Cliente AS C ON (C.Cli_DNI = V.Cli_DNI)
+    ORDER BY V.Ven_Nro DESC;
+END
+GO
+
+-- VENTA: Clientes combo
+IF OBJECT_ID('dbo.listar_clientes_combo_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_clientes_combo_sp;
+GO
+CREATE PROCEDURE dbo.listar_clientes_combo_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Cli_DNI, 
+        Cli_Apellido + ', ' + Cli_Nombre AS [NombreCompleto] 
+    FROM Cliente
+    ORDER BY Cli_Apellido ASC;
+END
+GO
+
+-- VENTA: Productos combo
+IF OBJECT_ID('dbo.listar_productos_venta_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.listar_productos_venta_sp;
+GO
+CREATE PROCEDURE dbo.listar_productos_venta_sp
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Prod_Codigo, 
+        Prod_Categoria, 
+        Prod_Descripcion, 
+        Prod_Precio 
+    FROM Producto
+    ORDER BY Prod_Descripcion ASC;
+END
+GO
+
+-- VENTA: Eliminar venta completa (Detalle + Cabecera en Transacción)
+IF OBJECT_ID('dbo.eliminar_venta_sp', 'P') IS NOT NULL DROP PROCEDURE dbo.eliminar_venta_sp;
+GO
+CREATE PROCEDURE dbo.eliminar_venta_sp
+    @nro INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE FROM VentaDetalle WHERE Ven_Nro = @nro;
+        DELETE FROM Venta WHERE Ven_Nro = @nro;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
