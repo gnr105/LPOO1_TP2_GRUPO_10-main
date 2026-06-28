@@ -1,0 +1,21 @@
+============================================================
+CREDENCIALES DE USUARIOS PARA PRUEBAS (SGP ÓPTICA)
+============================================================
+
+Para ingresar al sistema y probar la matriz de permisos con los 3 roles de usuario:
+
+1) ROL: ADMINISTRADOR (Acceso exclusivo a Usuarios y Productos)
+   - Usuario:    messi
+   - Contraseña: argentina
+   - Nombre:     Messi Lionel
+
+2) ROL: VENDEDOR / OPERADOR (Acceso exclusivo a Clientes y Ventas)
+   - Usuario:    dibu
+   - Contraseña: argentina
+   - Nombre:     Martinez Emiliano
+
+3) ROL: AUDITOR (Acceso a todo el sistema sin restricciones)
+   - Usuario:    scaloni
+   - Contraseña: argentina
+   - Nombre:     Scaloni Lionel
+============================================================
