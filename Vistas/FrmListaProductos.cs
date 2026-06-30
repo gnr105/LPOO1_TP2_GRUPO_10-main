@@ -41,6 +41,10 @@ namespace Vistas
             DateTime ff = dtpFechaFinal.Value.Date;
 
             dgwProductos.DataSource = TrabajarProducto.listar_prod_por_fecha(fi, ff);
+
+            int cant_prod = TrabajarProducto.contar_prod_por_fecha(fi, ff);
+
+            txtCantVentas.Text = cant_prod.ToString();
         }
 
         private void btnBuscarPorCliente_Click(object sender, EventArgs e)

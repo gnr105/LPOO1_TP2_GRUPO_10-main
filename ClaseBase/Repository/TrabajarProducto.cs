@@ -116,5 +116,30 @@ namespace ClaseBase
 
             return dt;
         }
+
+        public static int contar_prod_por_fecha(DateTime fechainicio, DateTime fechafin)
+        {
+            int cant_prod_vendidos;
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "ContProdVenPorFecha";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@fechaIni", fechainicio);
+            cmd.Parameters.AddWithValue("@fechaFin", fechafin);
+
+            cmd.Parameters.Add("@num", SqlDbType.Int);
+            cmd.Parameters["@num"].Direction = ParameterDirection.Output;
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+
+            cant_prod_vendidos = (int)cmd.Parameters["@num"].Value;
+
+            return cant_prod_vendidos;
+        }
     }
 }
