@@ -46,6 +46,27 @@ namespace ClaseBase
             return dt;
         }
 
+        //punto 3 del tp final
+        public static void EliminarVenta(int ventaId)
+        {
+            // Usamos la cadena de conexión nativa del proyecto que ya está probada
+            string connectionString = ClaseBase.Properties.Settings.Default.opticaConnectionString;
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_EliminarVenta", cnn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Le pasamos el ID que viene desde el formulario al parámetro del SP
+                    cmd.Parameters.AddWithValue("@VentaID", ventaId);
+
+                    cnn.Open();
+                    cmd.ExecuteNonQuery(); // Ejecuta la baja en la base de datos
+                }
+            }
+        }
+
         public static DataTable list_productos()
         {
             SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);

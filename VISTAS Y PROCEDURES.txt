@@ -302,4 +302,41 @@ BEGIN
     VALUES (@ven_nro, @prod_codigo, @cantidad, @precio, (@cantidad * @precio)); 
 END
 GO
+
+--Eliminar Venta
+CREATE PROCEDURE sp_EliminarVenta
+    @VentaID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        -- 1. Primero borramos los renglones en VentaDetalle usando Ven_Nro
+        DELETE FROM VentaDetalle 
+        WHERE Ven_Nro = @VentaID; 
+
+        -- 2. Ahora sí borramos la venta principal en Venta usando Ven_Nro
+        DELETE FROM Venta 
+        WHERE Ven_Nro = @VentaID;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorSeverity INT;
+        DECLARE @ErrorState INT;
+
+        SELECT 
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH
+END
+
+
 >>>>>>> 4a0150c06a15cc76ebceac1455aa23bc39d0bab7

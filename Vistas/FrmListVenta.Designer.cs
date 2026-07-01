@@ -40,6 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscarPorFechas = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnEliminarVenta = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwVenta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,11 +154,22 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Buscar por Fecha";
             // 
+            // btnEliminarVenta
+            // 
+            this.btnEliminarVenta.Location = new System.Drawing.Point(275, 559);
+            this.btnEliminarVenta.Name = "btnEliminarVenta";
+            this.btnEliminarVenta.Size = new System.Drawing.Size(119, 23);
+            this.btnEliminarVenta.TabIndex = 13;
+            this.btnEliminarVenta.Text = "Eliminar Venta";
+            this.btnEliminarVenta.UseVisualStyleBackColor = true;
+            this.btnEliminarVenta.Click += new System.EventHandler(this.btnEliminarVenta_Click);
+            // 
             // FrmListVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 601);
+            this.Controls.Add(this.btnEliminarVenta);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnBuscarPorFechas);
             this.Controls.Add(this.label4);
@@ -194,5 +206,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnBuscarPorFechas;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnEliminarVenta;
     }
 }
