@@ -129,5 +129,27 @@ namespace ClaseBase
 
             cnn.Close();
         }
+
+        public static int contar_productos_vendidos(string dni)
+        {
+            int cantCliente;
+
+            SqlConnection cnn = new SqlConnection(ClaseBase.Properties.Settings.Default.opticaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "Contar_Prod_Vendidos_sp";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = cnn;
+
+            cmd.Parameters.AddWithValue("@dni", dni);
+
+            cmd.Parameters.Add("@count_client",SqlDbType.Int);
+            cmd.Parameters["@count_client"].Direction = ParameterDirection.Output;
+
+            cnn.Open();
+            cmd.ExecuteNonQuery();
+
+            return Convert.ToInt32((int)cmd.Parameters["@count_client"].Value);
+        }
     }
 }
