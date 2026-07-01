@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,7 @@ namespace Vistas
         public FrmVentas()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
         private void FrmVentas_Load_1(object sender, EventArgs e)
         {
@@ -91,7 +92,7 @@ namespace Vistas
 
                 TrabajarVenta.insert_venta(fecha, dni, dtDetalles);
 
-                MessageBox.Show("Venta registrada con Ã©xito");
+                MessageBox.Show("Venta registrada con éxito");
                 limpiar_campos();
             }
             else
@@ -103,7 +104,7 @@ namespace Vistas
 
         private void configurar_grilla()
         {
-            dgvDetalle.Columns.Add("Codigo", "CÃ³d. Prod");
+            dgvDetalle.Columns.Add("Codigo", "Cód. Prod");
             dgvDetalle.Columns.Add("Descripcion", "Producto");
             dgvDetalle.Columns.Add("Precio", "Precio");
             dgvDetalle.Columns.Add("Cantidad", "Cant");

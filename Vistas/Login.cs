@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace Vistas
         public Login()
         {
             InitializeComponent();
-
+            ThemeHelper.Apply(this);
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -93,6 +93,11 @@ namespace Vistas
             btnIngresar.ForeColor = Color.Black;
             btnIngresar.FlatStyle = FlatStyle.Standard;
             btnIngresar.Font = new Font(btnIngresar.Font, FontStyle.Regular);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
         
 

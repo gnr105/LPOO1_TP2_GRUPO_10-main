@@ -67,11 +67,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(143, 20);
+            this.label3.Location = new System.Drawing.Point(144, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Bienvenido";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtUsuario
             // 

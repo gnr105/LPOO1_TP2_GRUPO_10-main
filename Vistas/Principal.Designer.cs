@@ -47,9 +47,9 @@
             // 
             // btnGOS
             // 
-            this.btnGOS.Location = new System.Drawing.Point(287, 109);
+            this.btnGOS.Location = new System.Drawing.Point(60, 154);
             this.btnGOS.Name = "btnGOS";
-            this.btnGOS.Size = new System.Drawing.Size(125, 23);
+            this.btnGOS.Size = new System.Drawing.Size(180, 36);
             this.btnGOS.TabIndex = 1;
             this.btnGOS.Text = "Gestion Obra Social";
             this.btnGOS.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             // 
             // btnGProduct
             // 
-            this.btnGProduct.Location = new System.Drawing.Point(84, 122);
+            this.btnGProduct.Location = new System.Drawing.Point(280, 100);
             this.btnGProduct.Name = "btnGProduct";
-            this.btnGProduct.Size = new System.Drawing.Size(125, 23);
+            this.btnGProduct.Size = new System.Drawing.Size(180, 36);
             this.btnGProduct.TabIndex = 2;
             this.btnGProduct.Text = "Gestion Producto";
             this.btnGProduct.UseVisualStyleBackColor = true;
@@ -67,9 +67,9 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(287, 235);
+            this.btnSalir.Location = new System.Drawing.Point(160, 320);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(125, 23);
+            this.btnSalir.Size = new System.Drawing.Size(200, 36);
             this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Cerrar sesión";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             this.departamentoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(494, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(520, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -108,9 +108,9 @@
             // 
             // btnGUsuario
             // 
-            this.btnGUsuario.Location = new System.Drawing.Point(84, 210);
+            this.btnGUsuario.Location = new System.Drawing.Point(60, 208);
             this.btnGUsuario.Name = "btnGUsuario";
-            this.btnGUsuario.Size = new System.Drawing.Size(125, 23);
+            this.btnGUsuario.Size = new System.Drawing.Size(180, 36);
             this.btnGUsuario.TabIndex = 5;
             this.btnGUsuario.Text = "Gestion de Usuario";
             this.btnGUsuario.UseVisualStyleBackColor = true;
@@ -118,9 +118,9 @@
             // 
             // btnGVenta
             // 
-            this.btnGVenta.Location = new System.Drawing.Point(287, 174);
+            this.btnGVenta.Location = new System.Drawing.Point(280, 154);
             this.btnGVenta.Name = "btnGVenta";
-            this.btnGVenta.Size = new System.Drawing.Size(125, 23);
+            this.btnGVenta.Size = new System.Drawing.Size(180, 36);
             this.btnGVenta.TabIndex = 6;
             this.btnGVenta.Text = "Gestion Venta";
             this.btnGVenta.UseVisualStyleBackColor = true;
@@ -128,19 +128,20 @@
             // 
             // lblBienvenida
             // 
-            this.lblBienvenida.AutoSize = true;
-            this.lblBienvenida.Location = new System.Drawing.Point(177, 35);
+            this.lblBienvenida.AutoSize = false;
+            this.lblBienvenida.Location = new System.Drawing.Point(60, 40);
             this.lblBienvenida.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBienvenida.Name = "lblBienvenida";
-            this.lblBienvenida.Size = new System.Drawing.Size(0, 13);
+            this.lblBienvenida.Size = new System.Drawing.Size(400, 36);
             this.lblBienvenida.TabIndex = 7;
+            this.lblBienvenida.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnListVentas
             // 
-            this.btnListVentas.Location = new System.Drawing.Point(278, 48);
+            this.btnListVentas.Location = new System.Drawing.Point(280, 208);
             this.btnListVentas.Margin = new System.Windows.Forms.Padding(2);
             this.btnListVentas.Name = "btnListVentas";
-            this.btnListVentas.Size = new System.Drawing.Size(141, 25);
+            this.btnListVentas.Size = new System.Drawing.Size(180, 36);
             this.btnListVentas.TabIndex = 7;
             this.btnListVentas.Text = "Listado de Ventas";
             this.btnListVentas.UseVisualStyleBackColor = true;
@@ -148,9 +149,9 @@
             // 
             // btnGCliente
             // 
-            this.btnGCliente.Location = new System.Drawing.Point(84, 78);
+            this.btnGCliente.Location = new System.Drawing.Point(60, 100);
             this.btnGCliente.Name = "btnGCliente";
-            this.btnGCliente.Size = new System.Drawing.Size(125, 23);
+            this.btnGCliente.Size = new System.Drawing.Size(180, 36);
             this.btnGCliente.TabIndex = 8;
             this.btnGCliente.Text = "Gestion Cliente";
             this.btnGCliente.UseVisualStyleBackColor = true;
@@ -158,19 +159,19 @@
             // 
             // btnListProd
             // 
-            this.btnListProd.Location = new System.Drawing.Point(84, 162);
+            this.btnListProd.Location = new System.Drawing.Point(60, 262);
             this.btnListProd.Name = "btnListProd";
-            this.btnListProd.Size = new System.Drawing.Size(125, 23);
+            this.btnListProd.Size = new System.Drawing.Size(180, 36);
             this.btnListProd.TabIndex = 9;
-            this.btnListProd.Text = "Listado deProductos";
+            this.btnListProd.Text = "Listado de Productos";
             this.btnListProd.UseVisualStyleBackColor = true;
             this.btnListProd.Click += new System.EventHandler(this.btnListProd_Click);
             // 
             // btnListClientesOS
             // 
-            this.btnListClientesOS.Location = new System.Drawing.Point(287, 141);
+            this.btnListClientesOS.Location = new System.Drawing.Point(280, 262);
             this.btnListClientesOS.Name = "btnListClientesOS";
-            this.btnListClientesOS.Size = new System.Drawing.Size(125, 23);
+            this.btnListClientesOS.Size = new System.Drawing.Size(180, 36);
             this.btnListClientesOS.TabIndex = 10;
             this.btnListClientesOS.Text = "Clientes x Obra Social";
             this.btnListClientesOS.UseVisualStyleBackColor = true;
@@ -180,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 314);
+            this.ClientSize = new System.Drawing.Size(520, 380);
             this.Controls.Add(this.btnListClientesOS);
             this.Controls.Add(this.btnListProd);
             this.Controls.Add(this.btnGCliente);
@@ -194,7 +195,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Principal";
-            this.Text = "Principal";
+            this.Text = "Sistema de Gestión - Óptica";
             this.Load += new System.EventHandler(this.Principal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

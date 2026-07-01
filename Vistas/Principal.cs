@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,7 @@ namespace Vistas
         public Principal(Usuario user)
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
             this.usuarioLogueado = user;
             aplicar_restricciones();
         }

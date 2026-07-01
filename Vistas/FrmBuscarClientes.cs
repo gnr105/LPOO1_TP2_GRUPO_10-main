@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,7 @@ namespace Vistas
         public FrmBuscarClientes()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

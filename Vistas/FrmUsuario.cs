@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,7 @@ namespace Vistas
         public FrmUsuario(Usuario user)
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
             usAct = user;
         }
 
@@ -43,15 +44,15 @@ namespace Vistas
         {
             Usuario oUser = new Usuario();
             oUser.Usu_NombreUsuario = txtUsuario.Text;
-            oUser.Usu_Contrasenia = txtContraseÃ±a.Text;
+            oUser.Usu_Contrasenia = txtContraseña.Text;
             oUser.Usu_ApellidoNombre = txtApellidoyNombre.Text;
             oUser.Rol_Codigo = (int)cmbRol_Codigo.SelectedValue;
 
             TrabajarUsuario.insert_usuario(oUser);
 
-            MessageBox.Show("Usuario registrado con Ã©xito"); // Feedback
+            MessageBox.Show("Usuario registrado con éxito"); // Feedback
 
-            load_usuarios(); // Esto ahora funcionarÃ¡ sin el error del 'as'
+            load_usuarios(); // Esto ahora funcionará sin el error del 'as'
             limpiar_campos();
         }
 
@@ -72,7 +73,7 @@ namespace Vistas
                 
 
                 txtUsuario.Text = dgwUsuarios.CurrentRow.Cells["Usuario"].Value.ToString();
-                txtContraseÃ±a.Text = dgwUsuarios.CurrentRow.Cells["ContraseÃ±a"].Value.ToString();
+                txtContraseña.Text = dgwUsuarios.CurrentRow.Cells["Contraseña"].Value.ToString();
                 txtApellidoyNombre.Text = dgwUsuarios.CurrentRow.Cells["ApellidoNombre"].Value.ToString();
                 cmbRol_Codigo.SelectedValue = dgwUsuarios.CurrentRow.Cells["Rol_Codigo"].Value;
             }
@@ -83,8 +84,8 @@ namespace Vistas
             // 1. Validar que haya una fila seleccionada
             if (dgwUsuarios.CurrentRow != null)
             {
-                // 2. Preguntar confirmaciÃ³n al usuario (opcional pero recomendado)
-                DialogResult result = MessageBox.Show("Â¿EstÃ¡ seguro de modificar este usuario?", "ConfirmaciÃ³n", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                // 2. Preguntar confirmación al usuario (opcional pero recomendado)
+                DialogResult result = MessageBox.Show("¿Está seguro de modificar este usuario?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -93,17 +94,17 @@ namespace Vistas
                     oUser.Usu_ID = (int)dgwUsuarios.CurrentRow.Cells["Usu_ID"].Value;
 
                     oUser.Usu_NombreUsuario = txtUsuario.Text;
-                    oUser.Usu_Contrasenia = txtContraseÃ±a.Text;
+                    oUser.Usu_Contrasenia = txtContraseña.Text;
                     oUser.Usu_ApellidoNombre = txtApellidoyNombre.Text;
                     oUser.Rol_Codigo = (int)cmbRol_Codigo.SelectedValue;
 
-                    // 3. Llamar al mÃ©todo de actualizaciÃ³n
+                    // 3. Llamar al método de actualización
                     TrabajarUsuario.update_usuario(oUser);
 
-                    MessageBox.Show("Usuario actualizado con Ã©xito");
+                    MessageBox.Show("Usuario actualizado con éxito");
 
                     load_usuarios(); // Recargar la grilla
-                    limpiar_campos(); // PodÃ©s crear un mÃ©todo para no repetir cÃ³digo
+                    limpiar_campos(); // Podés crear un método para no repetir código
                 }
             }
             else
@@ -115,7 +116,7 @@ namespace Vistas
         private void limpiar_campos()
         {
             txtUsuario.Text = "";
-            txtContraseÃ±a.Text = "";
+            txtContraseña.Text = "";
             txtApellidoyNombre.Text = "";
 
             // Para el combo, generalmente volvemos al primer elemento

@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +15,7 @@ namespace Vistas
         public Productos()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void Productos_Load(object sender, EventArgs e)
@@ -32,12 +33,12 @@ namespace Vistas
 
             TrabajarProducto.insert_producto(oProducto);
 
-            string mensaje = string.Format("Producto guardado correctamente:\nCÃ³digo: {0}\nDescripciÃ³n: {1}\nPrecio: {2:C}",
+            string mensaje = string.Format("Producto guardado correctamente:\nCódigo: {0}\nDescripción: {1}\nPrecio: {2:C}",
                                             oProducto.Prod_Codigo,
                                             oProducto.Prod_Descripcion,
                                             oProducto.Prod_Precio);
 
-            MessageBox.Show(mensaje, "Ã‰xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LimpiarCampos();
 
@@ -57,7 +58,7 @@ namespace Vistas
 
             if (!decimal.TryParse(txtPrecioProd.Text, out precio))
             {
-                MessageBox.Show("El precio ingresado no es vÃ¡lido.");
+                MessageBox.Show("El precio ingresado no es válido.");
                 return;
             }
 
@@ -70,7 +71,7 @@ namespace Vistas
 
             TrabajarProducto.update_producto(oProducto);
 
-            MessageBox.Show("Producto actualizado correctamente", "Ã‰xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Producto actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LimpiarCampos();
             btnListar_Click(null, null);
@@ -85,8 +86,8 @@ namespace Vistas
             }
 
             DialogResult respuesta = MessageBox.Show(
-                "Â¿EstÃ¡ seguro que desea eliminar este producto?",
-                "Confirmar eliminaciÃ³n",
+                "¿Está seguro que desea eliminar este producto?",
+                "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
@@ -95,7 +96,7 @@ namespace Vistas
             {
                 TrabajarProducto.delete_producto(txtCodigoProd.Text);
 
-                MessageBox.Show("Producto eliminado correctamente", "Ã‰xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Producto eliminado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarCampos();
                 btnListar_Click(null, null);

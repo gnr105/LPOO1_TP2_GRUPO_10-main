@@ -15,6 +15,7 @@ namespace Vistas
         public FrmClientesPorObraSocial()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void FrmClientesPorObraSocial_Load(object sender, EventArgs e)

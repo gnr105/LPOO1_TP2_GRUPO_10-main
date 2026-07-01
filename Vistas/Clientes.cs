@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +15,7 @@ namespace Vistas
         public Clientes()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void load_clientes()

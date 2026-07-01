@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +15,7 @@ namespace Vistas
         public ObrasSociales()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace Vistas
                                             oObraSoc.OS_Direccion,
                                             oObraSoc.OS_Telefono);
 
-            MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(mensaje, "�xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 

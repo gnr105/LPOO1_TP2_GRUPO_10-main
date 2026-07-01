@@ -15,6 +15,7 @@ namespace Vistas
         public FrmListVenta()
         {
             InitializeComponent();
+            ThemeHelper.Apply(this);
         }
 
         private void FrmVenta_Load(object sender, EventArgs e)
