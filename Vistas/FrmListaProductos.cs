@@ -56,7 +56,8 @@ namespace Vistas
                 if (dtProductos.Rows.Count > 0)
                 {
                     dgwProductos.DataSource = dtProductos;
-
+                    int cant = TrabajarProducto.contar_productos_vendidos(dni);
+                    txtCantVentas.Text = cant.ToString();
                 }
                 else
                 {
